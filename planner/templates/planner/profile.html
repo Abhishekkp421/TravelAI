@@ -1,0 +1,388 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | TravelAI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'planner/css/style.css' %}">
+
+    <style>
+
+        .profile-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 25px 100px;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-header h1 {
+            color: white;
+            font-size: 44px;
+            margin: 0 0 10px;
+        }
+
+        .profile-header h1 span {
+            color: #a970ff;
+        }
+
+        .profile-header p {
+            color: #8f98ad;
+        }
+
+        .profile-card {
+            background: #111522;
+            border: 1px solid #252b3c;
+            border-radius: 22px;
+            padding: 35px;
+        }
+
+        .profile-top {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #252b3c;
+        }
+
+        .profile-avatar {
+            width: 75px;
+            height: 75px;
+            border-radius: 20px;
+            background: linear-gradient(
+                135deg,
+                #7047ff,
+                #994cff
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .profile-top h2 {
+            color: white;
+            margin: 0 0 6px;
+            font-size: 25px;
+        }
+
+        .profile-top p {
+            color: #858da1;
+            margin: 0;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .info-box {
+            background: #191e2d;
+            border: 1px solid #2b3143;
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .info-box small {
+            display: block;
+            color: #858da1;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .info-box strong {
+            color: white;
+            font-size: 17px;
+        }
+
+        .trip-stat {
+            margin-top: 18px;
+            background: linear-gradient(
+                135deg,
+                #24194d,
+                #191e2d
+            );
+            border: 1px solid #6941c6;
+            border-radius: 14px;
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .trip-stat span {
+            color: #b9c1d2;
+            font-size: 15px;
+        }
+
+        .trip-stat strong {
+            color: #b88cff;
+            font-size: 28px;
+        }
+
+        .profile-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .profile-btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            background: linear-gradient(
+                135deg,
+                #7047ff,
+                #994cff
+            );
+        }
+
+        .profile-btn.secondary {
+            background: transparent;
+            border: 1px solid #2b3143;
+        }
+
+        .profile-btn:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+
+            .profile-page {
+                padding: 40px 15px;
+            }
+
+            .profile-header h1 {
+                font-size: 34px;
+            }
+
+            .profile-card {
+                padding: 25px;
+            }
+
+            .profile-info {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+
+            .profile-btn {
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <span class="logo-icon">✈</span>
+
+            <span>
+                Travel<span class="logo-ai">AI</span>
+            </span>
+
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/#features">
+                Features
+            </a>
+
+            <a href="/#how-it-works">
+                How It Works
+            </a>
+
+            <a href="{% url 'my_trips' %}">
+                My Trips
+            </a>
+
+            <a href="{% url 'profile' %}">
+                Profile
+            </a>
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- PROFILE -->
+
+    <main class="profile-page">
+
+        <div class="profile-header">
+
+            <h1>
+                My <span>Profile</span>
+            </h1>
+
+            <p>
+                Manage your TravelAI account and travel activity.
+            </p>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <div class="profile-top">
+
+                <div class="profile-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        {{ request.user.username }}
+                    </h2>
+
+                    <p>
+                        TravelAI Explorer
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-info">
+
+                <div class="info-box">
+
+                    <small>
+                        👤 Username
+                    </small>
+
+                    <strong>
+                        {{ request.user.username }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <small>
+                        📧 Email
+                    </small>
+
+                    <strong>
+                        {% if request.user.email %}
+                            {{ request.user.email }}
+                        {% else %}
+                            Not provided
+                        {% endif %}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <small>
+                        📅 Joined
+                    </small>
+
+                    <strong>
+                        {{ request.user.date_joined|date:"d M Y" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <small>
+                        🔐 Account Status
+                    </small>
+
+                    <strong>
+                        Active
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="trip-stat">
+
+                <span>
+                    🧳 Total Trips Created
+                </span>
+
+                <strong>
+                    {{ trips_count }}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-actions">
+
+                <a href="{% url 'my_trips' %}"
+                   class="profile-btn">
+
+                    View My Trips →
+
+                </a>
+
+                <a href="{% url 'plan_trip' %}"
+                   class="profile-btn secondary">
+
+                    ✨ Plan New Trip
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

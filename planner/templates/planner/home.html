@@ -1,0 +1,747 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Travel Planner</title>
+
+    <link rel="stylesheet"
+          href="{% static 'planner/css/style.css' %}">
+
+</head>
+
+<body>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav class="navbar">
+
+    <div class="logo">
+
+        <span class="logo-icon">✈</span>
+
+        <span>
+            Travel<span class="logo-ai">AI</span>
+        </span>
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="/" class="active">
+            Home
+        </a>
+
+        <a href="#features">
+            Features
+        </a>
+
+        <a href="#how-it-works">
+            How It Works
+        </a>
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'my_trips' %}">
+                My Trips
+            </a>
+
+            <a href="{% url 'profile' %}">
+                Profile
+            </a>
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        {% else %}
+
+          <a href="{% url 'login' %}">Login</a>
+<a href="{% url 'register' %}" class="nav-register">Register</a>
+
+        {% endif %}
+
+    </div>
+
+
+    {% if user.is_authenticated %}
+
+        <a href="{% url 'plan_trip' %}"
+           class="nav-btn">
+
+            Start Planning
+
+        </a>
+
+    {% else %}
+
+        <a href="{% url 'login' %}"
+           class="nav-btn">
+
+            Start Planning
+
+        </a>
+
+    {% endif %}
+
+</nav>
+
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero">
+
+
+        <div class="hero-content">
+
+
+            <div class="badge">
+
+                <span>✦</span>
+
+                AI-Powered Travel Planning
+
+            </div>
+
+
+            <h1>
+
+                Your Journey.<br>
+
+                <span>
+                    Intelligently Planned.
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Discover amazing places, find the perfect food,
+                manage your budget and get a personalized
+                day-by-day itinerary with AI.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+
+                <a href="{% url 'plan_trip' %}"
+                   class="primary-btn">
+
+                    Start Planning
+
+                    <span>→</span>
+
+                </a>
+
+
+                <a href="#features"
+                   class="secondary-btn">
+
+                    Explore Features
+
+                </a>
+
+
+            </div>
+
+
+            <div class="trust">
+
+
+                <div class="avatars">
+
+                    <span>👨</span>
+                    <span>👩</span>
+                    <span>🧑</span>
+                    <span>👨</span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Smart Travel Planning
+                    </strong>
+
+                    <small>
+                        Powered by AI & Machine Learning
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= HERO VISUAL ================= -->
+
+        <div class="hero-visual">
+
+
+            <div class="glow"></div>
+
+
+            <div class="travel-card main-card">
+
+
+                <div class="card-image">
+
+                    <div class="image-overlay">
+
+                        <span class="location">
+                            📍 Jaipur, India
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="trip-info">
+
+
+                    <div>
+
+                        <h3>
+                            Royal Jaipur Escape
+                        </h3>
+
+                        <p>
+                            3 Days • 2 People
+                        </p>
+
+                    </div>
+
+
+                    <div class="rating">
+
+                        ★ 4.8
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="mini-stats">
+
+
+                    <div>
+
+                        <span>🏨</span>
+
+                        <strong>
+                            Hotel
+                        </strong>
+
+                        <small>
+                            ₹4,000
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>🍛</span>
+
+                        <strong>
+                            Food
+                        </strong>
+
+                        <small>
+                            ₹3,000
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>🚕</span>
+
+                        <strong>
+                            Travel
+                        </strong>
+
+                        <small>
+                            ₹3,000
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- AI Recommendation -->
+
+            <div class="floating-card ai-card">
+
+
+                <div class="ai-icon">
+                    ✦
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        AI Recommendation
+                    </strong>
+
+                    <small>
+                        Perfect match for you!
+                    </small>
+
+                </div>
+
+
+                <span class="check">
+                    ✓
+                </span>
+
+
+            </div>
+
+
+
+            <!-- Budget -->
+
+            <div class="floating-card budget-card">
+
+
+                <span class="budget-icon">
+                    ₹
+                </span>
+
+
+                <div>
+
+                    <small>
+                        Estimated Budget
+                    </small>
+
+                    <strong>
+                        ₹13,500
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features-section"
+             id="features">
+
+
+        <div class="section-heading">
+
+
+            <div class="section-label">
+
+                ✦ SMART FEATURES
+
+            </div>
+
+
+            <h2>
+
+                Everything you need for<br>
+
+                <span>
+                    a better journey.
+                </span>
+
+            </h2>
+
+
+            <p>
+
+                One intelligent platform to plan,
+                personalize and manage your complete trip.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="feature-grid">
+
+
+            <!-- Smart Places -->
+
+            <div class="feature-card">
+
+
+                <div class="feature-icon purple">
+                    🗺️
+                </div>
+
+
+                <h3>
+                    Smart Places
+                </h3>
+
+
+                <p>
+
+                    Get personalized tourist place
+                    recommendations based on your interests.
+
+                </p>
+
+
+                <span class="feature-link">
+
+                    AI Recommendations →
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- Food -->
+
+            <div class="feature-card">
+
+
+                <div class="feature-icon orange">
+                    🍽️
+                </div>
+
+
+                <h3>
+                    Food Discovery
+                </h3>
+
+
+                <p>
+
+                    Find suitable restaurants based on
+                    cuisine, food preference, price and ratings.
+
+                </p>
+
+
+                <span class="feature-link">
+
+                    Discover Food →
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- Budget -->
+
+            <div class="feature-card">
+
+
+                <div class="feature-icon green">
+                    💰
+                </div>
+
+
+                <h3>
+                    Budget Prediction
+                </h3>
+
+
+                <p>
+
+                    Predict your approximate trip cost
+                    using machine learning.
+
+                </p>
+
+
+                <span class="feature-link">
+
+                    Predict Cost →
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- Itinerary -->
+
+            <div class="feature-card">
+
+
+                <div class="feature-icon blue">
+                    📅
+                </div>
+
+
+                <h3>
+                    Smart Itinerary
+                </h3>
+
+
+                <p>
+
+                    Get a day-wise travel schedule designed
+                    around your trip preferences.
+
+                </p>
+
+
+                <span class="feature-link">
+
+                    Plan Days →
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+
+    <section class="how-section"
+             id="how-it-works">
+
+
+        <div class="section-heading">
+
+
+            <div class="section-label">
+
+                ✦ HOW IT WORKS
+
+            </div>
+
+
+            <h2>
+
+                Plan your trip in<br>
+
+                <span>
+                    three simple steps.
+                </span>
+
+            </h2>
+
+
+        </div>
+
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+
+                <div class="step-number">
+                    01
+                </div>
+
+
+                <h3>
+                    Tell us your plan
+                </h3>
+
+
+                <p>
+
+                    Enter your destination, budget,
+                    days, people and preferences.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="step-line"></div>
+
+
+
+            <div class="step">
+
+
+                <div class="step-number">
+                    02
+                </div>
+
+
+                <h3>
+                    AI analyzes your needs
+                </h3>
+
+
+                <p>
+
+                    Our recommendation and ML systems
+                    process your travel requirements.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="step-line"></div>
+
+
+
+            <div class="step">
+
+
+                <div class="step-number">
+                    03
+                </div>
+
+
+                <h3>
+                    Get your perfect trip
+                </h3>
+
+
+                <p>
+
+                    Receive places, food, budget and
+                    a personalized itinerary.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta-section">
+
+
+        <div class="cta-content">
+
+
+            <div class="cta-icon">
+                ✈
+            </div>
+
+
+            <h2>
+                Ready to plan your next adventure?
+            </h2>
+
+
+            <p>
+
+                Let AI create a personalized
+                travel experience for you.
+
+            </p>
+
+
+            <a href="{% url 'plan_trip' %}"
+               class="primary-btn">
+
+                Start Planning
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+
+        <div class="footer-logo">
+
+            ✈ Travel<span>AI</span>
+
+        </div>
+
+
+        <p>
+
+            AI-Based Personalized Travel,
+            Food & Budget Planning System
+
+        </p>
+
+
+        <span>
+
+            Built with Django • Machine Learning • ❤️
+
+        </span>
+
+
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,444 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Trips | TravelAI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'planner/css/style.css' %}">
+
+    <style>
+
+        .trips-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 25px 100px;
+        }
+
+        .trips-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .trips-badge {
+            display: inline-block;
+            padding: 9px 18px;
+            border-radius: 30px;
+            border: 1px solid #6941c6;
+            color: #b88cff;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .trips-header h1 {
+            color: white;
+            font-size: 44px;
+            margin: 0 0 10px;
+        }
+
+        .trips-header h1 span {
+            color: #a970ff;
+        }
+
+        .trips-header p {
+            color: #8f98ad;
+            font-size: 16px;
+        }
+
+        .trips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .trip-card {
+            background: #111522;
+            border: 1px solid #252b3c;
+            border-radius: 20px;
+            padding: 24px;
+            transition: 0.2s ease;
+        }
+
+        .trip-card:hover {
+            border-color: #6941c6;
+            transform: translateY(-4px);
+        }
+
+        .trip-destination {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .trip-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: #24194d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .trip-destination h3 {
+            color: white;
+            margin: 0;
+            font-size: 21px;
+        }
+
+        .trip-date {
+            color: #858da1;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .trip-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .trip-detail {
+            background: #191e2d;
+            border: 1px solid #2b3143;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .trip-detail small {
+            display: block;
+            color: #858da1;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .trip-detail strong {
+            color: white;
+            font-size: 15px;
+        }
+
+        .trip-button {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 10px;
+            background: linear-gradient(
+                135deg,
+                #7047ff,
+                #994cff
+            );
+            color: white;
+            font-weight: 600;
+        }
+        .delete-trip-button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 11px;
+    border-radius: 10px;
+    border: 1px solid #5a2932;
+    background: transparent;
+    color: #ff7b88;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.delete-trip-button:hover {
+    background: rgba(220, 53, 69, 0.12);
+    border-color: #ff5c6c;
+}
+
+        .trip-button:hover {
+            opacity: 0.9;
+        }
+
+        .empty-trips {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+            background: #111522;
+            border: 1px solid #252b3c;
+            border-radius: 20px;
+            padding: 45px;
+        }
+
+        .empty-trips-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .empty-trips h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .empty-trips p {
+            color: #858da1;
+            margin-bottom: 25px;
+        }
+
+        .new-trip-button {
+            display: inline-block;
+            text-decoration: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            background: linear-gradient(
+                135deg,
+                #7047ff,
+                #994cff
+            );
+            color: white;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+
+            .trips-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .trips-page {
+                padding: 40px 15px;
+            }
+
+            .trips-header h1 {
+                font-size: 34px;
+            }
+
+            .trips-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <span class="logo-icon">✈</span>
+
+            <span>
+                Travel<span class="logo-ai">AI</span>
+            </span>
+
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/#features">
+                Features
+            </a>
+
+            <a href="/#how-it-works">
+                How It Works
+            </a>
+
+            <a href="{% url 'my_trips' %}">
+                My Trips
+            </a>
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="trips-page">
+
+        <div class="trips-header">
+
+            <div class="trips-badge">
+                ✦ YOUR TRAVEL HISTORY
+            </div>
+
+            <h1>
+                My <span>Trips</span>
+            </h1>
+
+            <p>
+                View and revisit all your AI-generated travel plans.
+            </p>
+
+        </div>
+
+
+        {% if trips %}
+
+        <div class="trips-grid">
+
+            {% for trip in trips %}
+
+            <div class="trip-card">
+
+                <div class="trip-destination">
+
+                    <div class="trip-icon">
+                        📍
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            {{ trip.destination }}
+                        </h3>
+
+                        <div class="trip-date">
+                            {{ trip.created_at|date:"d M Y" }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="trip-details">
+
+                    <div class="trip-detail">
+
+                        <small>
+                            📅 Duration
+                        </small>
+
+                        <strong>
+                            {{ trip.days }} Days
+                        </strong>
+
+                    </div>
+
+
+                    <div class="trip-detail">
+
+                        <small>
+                            👥 Travelers
+                        </small>
+
+                        <strong>
+                            {{ trip.people }} People
+                        </strong>
+
+                    </div>
+
+
+                    <div class="trip-detail">
+
+                        <small>
+                            💰 Budget
+                        </small>
+
+                        <strong>
+                            ₹{{ trip.budget|floatformat:0 }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="trip-detail">
+
+                        <small>
+                            🍽️ Food
+                        </small>
+
+                        <strong>
+                            {{ trip.food_preference|title }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <a href="{% url 'trip_result' trip.id %}"
+                   class="trip-button">
+
+                    View Trip Plan →
+
+                </a>
+                <form method="POST"
+      action="{% url 'delete_trip' trip.id %}"
+      onsubmit="return confirm('Are you sure you want to delete this trip?');">
+
+    {% csrf_token %}
+
+    <button type="submit"
+            class="delete-trip-button">
+
+        🗑 Delete Trip
+
+    </button>
+
+</form>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <div class="empty-trips">
+
+            <div class="empty-trips-icon">
+                🧳
+            </div>
+
+            <h2>
+                No Trips Yet
+            </h2>
+
+            <p>
+                You haven't created any travel plans yet.
+                Start planning your first AI-powered trip.
+            </p>
+
+            <a href="{% url 'plan_trip' %}"
+               class="new-trip-button">
+
+                ✨ Plan Your First Trip
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </main>
+
+</body>
+
+</html>

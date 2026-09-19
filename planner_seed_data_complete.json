@@ -1,0 +1,1658 @@
+[
+  {
+    "model": "planner.place",
+    "pk": 1,
+    "fields": {
+      "name": "Hawa Mahal",
+      "destination": "Jaipur",
+      "category": "Historical",
+      "average_cost": "200",
+      "rating": "4.5",
+      "description": "Iconic five-storey Palace of Winds known for its pink sandstone facade and jharokhas."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 2,
+    "fields": {
+      "name": "Amber Fort",
+      "destination": "Jaipur",
+      "category": "Historical",
+      "average_cost": "550",
+      "rating": "4.7",
+      "description": "Hilltop fort complex known for Rajput architecture, courtyards and Sheesh Mahal."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 3,
+    "fields": {
+      "name": "City Palace",
+      "destination": "Jaipur",
+      "category": "Historical",
+      "average_cost": "500",
+      "rating": "4.6",
+      "description": "Royal palace complex combining Rajput and Mughal architectural elements."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 4,
+    "fields": {
+      "name": "Jantar Mantar",
+      "destination": "Jaipur",
+      "category": "Science",
+      "average_cost": "200",
+      "rating": "4.5",
+      "description": "Historic astronomical observatory with large geometric instruments."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 5,
+    "fields": {
+      "name": "Jal Mahal",
+      "destination": "Jaipur",
+      "category": "Scenic",
+      "average_cost": "0",
+      "rating": "4.4",
+      "description": "Picturesque palace appearing to float in Man Sagar Lake."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 6,
+    "fields": {
+      "name": "Nahargarh Fort",
+      "destination": "Jaipur",
+      "category": "Adventure",
+      "average_cost": "200",
+      "rating": "4.5",
+      "description": "Hilltop fort offering panoramic views over Jaipur."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 7,
+    "fields": {
+      "name": "India Gate",
+      "destination": "Delhi",
+      "category": "Historical",
+      "average_cost": "0",
+      "rating": "4.6",
+      "description": "War memorial and one of Delhi's best-known landmarks."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 8,
+    "fields": {
+      "name": "Red Fort",
+      "destination": "Delhi",
+      "category": "Historical",
+      "average_cost": "500",
+      "rating": "4.5",
+      "description": "Historic Mughal fort and UNESCO World Heritage Site."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 9,
+    "fields": {
+      "name": "Qutub Minar",
+      "destination": "Delhi",
+      "category": "Historical",
+      "average_cost": "500",
+      "rating": "4.6",
+      "description": "Historic minaret complex and UNESCO World Heritage Site."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 10,
+    "fields": {
+      "name": "Humayun's Tomb",
+      "destination": "Delhi",
+      "category": "Historical",
+      "average_cost": "500",
+      "rating": "4.5",
+      "description": "Mughal-era garden tomb known for its architecture and landscaped grounds."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 11,
+    "fields": {
+      "name": "Lotus Temple",
+      "destination": "Delhi",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Distinctive lotus-shaped Bahai House of Worship."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 12,
+    "fields": {
+      "name": "Akshardham Temple",
+      "destination": "Delhi",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.7",
+      "description": "Large temple complex known for architecture, exhibitions and gardens."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 13,
+    "fields": {
+      "name": "Taj Mahal",
+      "destination": "Agra",
+      "category": "Historical",
+      "average_cost": "1100",
+      "rating": "4.9",
+      "description": "World-famous marble mausoleum and symbol of Agra."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 14,
+    "fields": {
+      "name": "Agra Fort",
+      "destination": "Agra",
+      "category": "Historical",
+      "average_cost": "550",
+      "rating": "4.6",
+      "description": "Massive Mughal fort overlooking the Yamuna River."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 15,
+    "fields": {
+      "name": "Mehtab Bagh",
+      "destination": "Agra",
+      "category": "Scenic",
+      "average_cost": "300",
+      "rating": "4.4",
+      "description": "Riverside garden offering a scenic Taj Mahal viewpoint."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 16,
+    "fields": {
+      "name": "Itmad-ud-Daulah",
+      "destination": "Agra",
+      "category": "Historical",
+      "average_cost": "300",
+      "rating": "4.4",
+      "description": "Elegant Mughal tomb often noted for its marble inlay work."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 17,
+    "fields": {
+      "name": "Fatehpur Sikri",
+      "destination": "Agra",
+      "category": "Historical",
+      "average_cost": "550",
+      "rating": "4.5",
+      "description": "Historic Mughal city complex with palaces, courtyards and gateways."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 18,
+    "fields": {
+      "name": "Agra Local Market",
+      "destination": "Agra",
+      "category": "Shopping",
+      "average_cost": "0",
+      "rating": "4.2",
+      "description": "Local shopping area for handicrafts, marble work and souvenirs."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 19,
+    "fields": {
+      "name": "Dashashwamedh Ghat",
+      "destination": "Varanasi",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.8",
+      "description": "One of Varanasi's prominent riverfront ghats and a major evening activity area."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 20,
+    "fields": {
+      "name": "Assi Ghat",
+      "destination": "Varanasi",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.7",
+      "description": "Popular Ganga-side ghat known for sunrise, evening activities and cultural atmosphere."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 21,
+    "fields": {
+      "name": "Kashi Vishwanath Temple",
+      "destination": "Varanasi",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.8",
+      "description": "Important Shiva temple in the heart of the old city."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 22,
+    "fields": {
+      "name": "Sarnath",
+      "destination": "Varanasi",
+      "category": "Historical",
+      "average_cost": "50",
+      "rating": "4.6",
+      "description": "Important Buddhist heritage site located near Varanasi."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 23,
+    "fields": {
+      "name": "Manikarnika Ghat",
+      "destination": "Varanasi",
+      "category": "Cultural",
+      "average_cost": "0",
+      "rating": "4.4",
+      "description": "Historic and culturally significant ghat on the Ganges."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 24,
+    "fields": {
+      "name": "Ramnagar Fort",
+      "destination": "Varanasi",
+      "category": "Historical",
+      "average_cost": "50",
+      "rating": "4.2",
+      "description": "Historic riverside fort complex across the Ganges."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 25,
+    "fields": {
+      "name": "City Palace",
+      "destination": "Udaipur",
+      "category": "Historical",
+      "average_cost": "400",
+      "rating": "4.7",
+      "description": "Large palace complex overlooking Lake Pichola and the old city."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 26,
+    "fields": {
+      "name": "Lake Pichola",
+      "destination": "Udaipur",
+      "category": "Scenic",
+      "average_cost": "500",
+      "rating": "4.8",
+      "description": "Picturesque lake best experienced through a boat ride and waterfront views."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 27,
+    "fields": {
+      "name": "Sajjangarh Monsoon Palace",
+      "destination": "Udaipur",
+      "category": "Scenic",
+      "average_cost": "300",
+      "rating": "4.5",
+      "description": "Hilltop palace known for panoramic views of Udaipur and its lakes."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 28,
+    "fields": {
+      "name": "Jag Mandir",
+      "destination": "Udaipur",
+      "category": "Historical",
+      "average_cost": "500",
+      "rating": "4.5",
+      "description": "Island palace on Lake Pichola with landscaped courtyards."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 29,
+    "fields": {
+      "name": "Saheliyon-ki-Bari",
+      "destination": "Udaipur",
+      "category": "Garden",
+      "average_cost": "50",
+      "rating": "4.4",
+      "description": "Historic garden featuring fountains, pools and ornamental greenery."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 30,
+    "fields": {
+      "name": "Bagore Ki Haveli",
+      "destination": "Udaipur",
+      "category": "Cultural",
+      "average_cost": "150",
+      "rating": "4.5",
+      "description": "Historic haveli museum known for cultural exhibits and performances."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 31,
+    "fields": {
+      "name": "Baga Beach",
+      "destination": "Goa",
+      "category": "Nature",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Popular beach known for its lively atmosphere, shoreline and water activities."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 32,
+    "fields": {
+      "name": "Calangute Beach",
+      "destination": "Goa",
+      "category": "Nature",
+      "average_cost": "0",
+      "rating": "4.4",
+      "description": "One of Goa's most popular beaches with a wide sandy shoreline and nearby attractions."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 33,
+    "fields": {
+      "name": "Fort Aguada",
+      "destination": "Goa",
+      "category": "Historical",
+      "average_cost": "50",
+      "rating": "4.5",
+      "description": "Historic Portuguese fort overlooking the Arabian Sea."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 34,
+    "fields": {
+      "name": "Basilica of Bom Jesus",
+      "destination": "Goa",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.6",
+      "description": "Historic basilica in Old Goa known for its architecture and heritage."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 35,
+    "fields": {
+      "name": "Dudhsagar Falls",
+      "destination": "Goa",
+      "category": "Adventure",
+      "average_cost": "600",
+      "rating": "4.6",
+      "description": "Spectacular waterfall surrounded by lush forest and a popular adventure destination."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 36,
+    "fields": {
+      "name": "Anjuna Flea Market",
+      "destination": "Goa",
+      "category": "Shopping",
+      "average_cost": "0",
+      "rating": "4.3",
+      "description": "Popular market for clothing, handicrafts, souvenirs and local products."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 37,
+    "fields": {
+      "name": "Palolem Beach",
+      "destination": "Goa",
+      "category": "Nature",
+      "average_cost": "0",
+      "rating": "4.6",
+      "description": "Scenic beach in South Goa known for its curved shoreline and relaxed atmosphere."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 38,
+    "fields": {
+      "name": "Chapora Fort",
+      "destination": "Goa",
+      "category": "Historical",
+      "average_cost": "0",
+      "rating": "4.4",
+      "description": "Hilltop fort offering wide views of the coastline and surrounding landscape."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 39,
+    "fields": {
+      "name": "Gateway of India",
+      "destination": "Mumbai",
+      "category": "Historical",
+      "average_cost": "0",
+      "rating": "4.6",
+      "description": "Iconic waterfront monument and one of Mumbai's best-known landmarks."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 40,
+    "fields": {
+      "name": "Marine Drive",
+      "destination": "Mumbai",
+      "category": "Nature",
+      "average_cost": "0",
+      "rating": "4.7",
+      "description": "Scenic seaside promenade famous for sunset and city views."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 41,
+    "fields": {
+      "name": "Chhatrapati Shivaji Maharaj Terminus",
+      "destination": "Mumbai",
+      "category": "Historical",
+      "average_cost": "0",
+      "rating": "4.6",
+      "description": "Historic railway terminus known for its impressive architecture."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 42,
+    "fields": {
+      "name": "Elephanta Caves",
+      "destination": "Mumbai",
+      "category": "Historical",
+      "average_cost": "40",
+      "rating": "4.4",
+      "description": "Rock-cut cave complex featuring historic sculptures and temples."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 43,
+    "fields": {
+      "name": "Colaba Causeway",
+      "destination": "Mumbai",
+      "category": "Shopping",
+      "average_cost": "0",
+      "rating": "4.3",
+      "description": "Popular shopping street with clothing, handicrafts and souvenirs."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 44,
+    "fields": {
+      "name": "Sanjay Gandhi National Park",
+      "destination": "Mumbai",
+      "category": "Nature",
+      "average_cost": "85",
+      "rating": "4.5",
+      "description": "Large urban national park with forests, trails and wildlife."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 45,
+    "fields": {
+      "name": "Bandra-Worli Sea Link",
+      "destination": "Mumbai",
+      "category": "Scenic",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Modern cable-stayed bridge offering an impressive Mumbai skyline view."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 46,
+    "fields": {
+      "name": "Juhu Beach",
+      "destination": "Mumbai",
+      "category": "Food",
+      "average_cost": "0",
+      "rating": "4.3",
+      "description": "Popular beach known for its promenade and Mumbai street food."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 47,
+    "fields": {
+      "name": "Solang Valley",
+      "destination": "Manali",
+      "category": "Adventure",
+      "average_cost": "500",
+      "rating": "4.6",
+      "description": "Mountain valley popular for snow activities, adventure sports and scenic views."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 48,
+    "fields": {
+      "name": "Rohtang Pass",
+      "destination": "Manali",
+      "category": "Nature",
+      "average_cost": "600",
+      "rating": "4.5",
+      "description": "High mountain pass surrounded by dramatic Himalayan scenery."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 49,
+    "fields": {
+      "name": "Hadimba Temple",
+      "destination": "Manali",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.6",
+      "description": "Ancient wooden temple surrounded by cedar forest."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 50,
+    "fields": {
+      "name": "Old Manali",
+      "destination": "Manali",
+      "category": "Food",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Lively area known for cafes, local food, shops and mountain-town atmosphere."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 51,
+    "fields": {
+      "name": "Manu Temple",
+      "destination": "Manali",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Peaceful temple dedicated to Sage Manu in Old Manali."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 52,
+    "fields": {
+      "name": "Vashisht Hot Springs",
+      "destination": "Manali",
+      "category": "Nature",
+      "average_cost": "0",
+      "rating": "4.4",
+      "description": "Natural hot springs and temple area near Manali."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 53,
+    "fields": {
+      "name": "Jogini Waterfall",
+      "destination": "Manali",
+      "category": "Adventure",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Scenic waterfall reached by a popular hiking trail."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 54,
+    "fields": {
+      "name": "Mall Road Manali",
+      "destination": "Manali",
+      "category": "Shopping",
+      "average_cost": "0",
+      "rating": "4.3",
+      "description": "Central shopping area for local products, food and souvenirs."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 55,
+    "fields": {
+      "name": "The Ridge",
+      "destination": "Shimla",
+      "category": "Scenic",
+      "average_cost": "0",
+      "rating": "4.6",
+      "description": "Open central promenade offering mountain and town views."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 56,
+    "fields": {
+      "name": "Mall Road",
+      "destination": "Shimla",
+      "category": "Shopping",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Popular pedestrian street with shops, cafes and local products."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 57,
+    "fields": {
+      "name": "Jakhoo Temple",
+      "destination": "Shimla",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Hilltop Hanuman temple offering panoramic views of Shimla."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 58,
+    "fields": {
+      "name": "Kufri",
+      "destination": "Shimla",
+      "category": "Nature",
+      "average_cost": "50",
+      "rating": "4.4",
+      "description": "Mountain destination known for scenic landscapes and outdoor activities."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 59,
+    "fields": {
+      "name": "Christ Church",
+      "destination": "Shimla",
+      "category": "Historical",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Historic neo-Gothic church overlooking the Ridge."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 60,
+    "fields": {
+      "name": "Viceregal Lodge",
+      "destination": "Shimla",
+      "category": "Historical",
+      "average_cost": "75",
+      "rating": "4.6",
+      "description": "Historic colonial-era building surrounded by landscaped grounds."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 61,
+    "fields": {
+      "name": "Green Valley",
+      "destination": "Shimla",
+      "category": "Nature",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Scenic viewpoint surrounded by dense Himalayan greenery."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 62,
+    "fields": {
+      "name": "Shimla State Museum",
+      "destination": "Shimla",
+      "category": "Historical",
+      "average_cost": "50",
+      "rating": "4.3",
+      "description": "Museum showcasing regional art, culture and historical collections."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 63,
+    "fields": {
+      "name": "Laxman Jhula",
+      "destination": "Rishikesh",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Famous suspension bridge area associated with the spiritual atmosphere of Rishikesh."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 64,
+    "fields": {
+      "name": "Ram Jhula",
+      "destination": "Rishikesh",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.5",
+      "description": "Popular pedestrian suspension bridge connecting areas across the Ganges."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 65,
+    "fields": {
+      "name": "Triveni Ghat",
+      "destination": "Rishikesh",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.7",
+      "description": "Major riverside ghat known for its evening Ganga Aarti."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 66,
+    "fields": {
+      "name": "River Rafting",
+      "destination": "Rishikesh",
+      "category": "Adventure",
+      "average_cost": "1000",
+      "rating": "4.6",
+      "description": "Popular white-water rafting experience on the Ganges."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 67,
+    "fields": {
+      "name": "Beatles Ashram",
+      "destination": "Rishikesh",
+      "category": "Spiritual",
+      "average_cost": "150",
+      "rating": "4.4",
+      "description": "Historic ashram complex known for meditation spaces and artwork."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 68,
+    "fields": {
+      "name": "Neer Garh Waterfall",
+      "destination": "Rishikesh",
+      "category": "Nature",
+      "average_cost": "50",
+      "rating": "4.5",
+      "description": "Refreshing waterfall destination reached through a short nature trail."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 69,
+    "fields": {
+      "name": "Parmarth Niketan",
+      "destination": "Rishikesh",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.6",
+      "description": "Well-known riverside ashram and spiritual center."
+    }
+  },
+  {
+    "model": "planner.place",
+    "pk": 70,
+    "fields": {
+      "name": "Neelkanth Mahadev Temple",
+      "destination": "Rishikesh",
+      "category": "Spiritual",
+      "average_cost": "0",
+      "rating": "4.6",
+      "description": "Important Shiva temple located in the hills near Rishikesh."
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 1,
+    "fields": {
+      "name": "Rawat Mishthan Bhandar",
+      "destination": "Jaipur",
+      "cuisine": "Rajasthani",
+      "price_range": "₹",
+      "rating": "3.9",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 2,
+    "fields": {
+      "name": "Laxmi Misthan Bhandar",
+      "destination": "Jaipur",
+      "cuisine": "Rajasthani",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 3,
+    "fields": {
+      "name": "Govindam Retreat",
+      "destination": "Jaipur",
+      "cuisine": "Rajasthani",
+      "price_range": "₹₹",
+      "rating": "4.4",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 4,
+    "fields": {
+      "name": "Anokhi Cafe",
+      "destination": "Jaipur",
+      "cuisine": "Cafe",
+      "price_range": "₹₹",
+      "rating": "4.3",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 5,
+    "fields": {
+      "name": "Saravana Bhavan",
+      "destination": "Delhi",
+      "cuisine": "South Indian",
+      "price_range": "₹₹",
+      "rating": "4.2",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 6,
+    "fields": {
+      "name": "Bikanervala",
+      "destination": "Delhi",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 7,
+    "fields": {
+      "name": "Haldiram's",
+      "destination": "Delhi",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.0",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 8,
+    "fields": {
+      "name": "Sita Ram Diwan Chand",
+      "destination": "Delhi",
+      "cuisine": "North Indian",
+      "price_range": "₹",
+      "rating": "4.3",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 9,
+    "fields": {
+      "name": "Dasaprakash",
+      "destination": "Agra",
+      "cuisine": "South Indian",
+      "price_range": "₹₹",
+      "rating": "4.2",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 10,
+    "fields": {
+      "name": "Shankara Vegis Restaurant",
+      "destination": "Agra",
+      "cuisine": "Indian",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 11,
+    "fields": {
+      "name": "Pind Balluchi",
+      "destination": "Agra",
+      "cuisine": "North Indian",
+      "price_range": "₹₹₹",
+      "rating": "4.0",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 12,
+    "fields": {
+      "name": "Joney's Place",
+      "destination": "Agra",
+      "cuisine": "Indian",
+      "price_range": "₹",
+      "rating": "4.1",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 13,
+    "fields": {
+      "name": "Kashi Chat Bhandar",
+      "destination": "Varanasi",
+      "cuisine": "Street Food",
+      "price_range": "₹",
+      "rating": "4.3",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 14,
+    "fields": {
+      "name": "Baati Chokha",
+      "destination": "Varanasi",
+      "cuisine": "Bihari",
+      "price_range": "₹₹",
+      "rating": "4.4",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 15,
+    "fields": {
+      "name": "Shree Shivay Thali Dining",
+      "destination": "Varanasi",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.4",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 16,
+    "fields": {
+      "name": "Blue Lassi Shop",
+      "destination": "Varanasi",
+      "cuisine": "Cafe",
+      "price_range": "₹",
+      "rating": "4.2",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 17,
+    "fields": {
+      "name": "Natraj Dining Hall",
+      "destination": "Udaipur",
+      "cuisine": "Rajasthani",
+      "price_range": "₹₹",
+      "rating": "4.3",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 18,
+    "fields": {
+      "name": "Krishna Dining",
+      "destination": "Udaipur",
+      "cuisine": "Indian",
+      "price_range": "₹",
+      "rating": "4.2",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 19,
+    "fields": {
+      "name": "Khamma Ghani Restaurant",
+      "destination": "Udaipur",
+      "cuisine": "Rajasthani",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 20,
+    "fields": {
+      "name": "Jheel's Ginger Coffee Bar & Bakery",
+      "destination": "Udaipur",
+      "cuisine": "Cafe",
+      "price_range": "₹₹",
+      "rating": "4.2",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 21,
+    "fields": {
+      "name": "Handi Restaurant",
+      "destination": "Jaipur",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.2",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 22,
+    "fields": {
+      "name": "Spice Court",
+      "destination": "Jaipur",
+      "cuisine": "North Indian",
+      "price_range": "₹₹₹",
+      "rating": "4.3",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 23,
+    "fields": {
+      "name": "The Curry House",
+      "destination": "Jaipur",
+      "cuisine": "Indian",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 24,
+    "fields": {
+      "name": "Baradari Restaurant",
+      "destination": "Jaipur",
+      "cuisine": "Indian",
+      "price_range": "₹₹₹",
+      "rating": "4.2",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 25,
+    "fields": {
+      "name": "Karim's",
+      "destination": "Delhi",
+      "cuisine": "Mughlai",
+      "price_range": "₹₹",
+      "rating": "4.3",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 26,
+    "fields": {
+      "name": "Gulati Restaurant",
+      "destination": "Delhi",
+      "cuisine": "North Indian",
+      "price_range": "₹₹₹",
+      "rating": "4.4",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 27,
+    "fields": {
+      "name": "Sandoz",
+      "destination": "Delhi",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 28,
+    "fields": {
+      "name": "Cafe Delhi Heights",
+      "destination": "Delhi",
+      "cuisine": "Multi-Cuisine",
+      "price_range": "₹₹₹",
+      "rating": "4.2",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 29,
+    "fields": {
+      "name": "Pinch of Spice",
+      "destination": "Agra",
+      "cuisine": "North Indian",
+      "price_range": "₹₹₹",
+      "rating": "4.4",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 30,
+    "fields": {
+      "name": "Mughal Room",
+      "destination": "Agra",
+      "cuisine": "Mughlai",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 31,
+    "fields": {
+      "name": "Baati Chokha",
+      "destination": "Varanasi",
+      "cuisine": "Bihari",
+      "price_range": "₹₹",
+      "rating": "4.4",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 32,
+    "fields": {
+      "name": "The Great Kabab Factory",
+      "destination": "Varanasi",
+      "cuisine": "Mughlai",
+      "price_range": "₹₹₹",
+      "rating": "4.2",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 33,
+    "fields": {
+      "name": "Shahi Tukda Restaurant",
+      "destination": "Varanasi",
+      "cuisine": "Indian",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 34,
+    "fields": {
+      "name": "Moti Mahal Delux",
+      "destination": "Varanasi",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.0",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 35,
+    "fields": {
+      "name": "Upre by 1559 AD",
+      "destination": "Udaipur",
+      "cuisine": "Indian",
+      "price_range": "₹₹₹",
+      "rating": "4.5",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 36,
+    "fields": {
+      "name": "Khamma Ghani Restaurant",
+      "destination": "Udaipur",
+      "cuisine": "Rajasthani",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 37,
+    "fields": {
+      "name": "Jheel's Ginger Coffee Bar",
+      "destination": "Udaipur",
+      "cuisine": "Cafe",
+      "price_range": "₹₹",
+      "rating": "4.2",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 38,
+    "fields": {
+      "name": "Ambrai Restaurant",
+      "destination": "Udaipur",
+      "cuisine": "Indian",
+      "price_range": "₹₹₹",
+      "rating": "4.4",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 39,
+    "fields": {
+      "name": "Viva Panjim",
+      "destination": "Goa",
+      "cuisine": "Goan",
+      "price_range": "₹₹",
+      "rating": "4.3",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 40,
+    "fields": {
+      "name": "Gunpowder",
+      "destination": "Goa",
+      "cuisine": "South Indian",
+      "price_range": "₹₹₹",
+      "rating": "4.5",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 41,
+    "fields": {
+      "name": "Thalassa",
+      "destination": "Goa",
+      "cuisine": "Greek",
+      "price_range": "₹₹₹",
+      "rating": "4.4",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 42,
+    "fields": {
+      "name": "Kamat's",
+      "destination": "Goa",
+      "cuisine": "Indian",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 43,
+    "fields": {
+      "name": "Ritz Classic",
+      "destination": "Goa",
+      "cuisine": "Goan",
+      "price_range": "₹₹",
+      "rating": "4.3",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 44,
+    "fields": {
+      "name": "Cafe Mangii",
+      "destination": "Goa",
+      "cuisine": "Multi-Cuisine",
+      "price_range": "₹₹₹",
+      "rating": "4.2",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 45,
+    "fields": {
+      "name": "Britannia & Co.",
+      "destination": "Mumbai",
+      "cuisine": "Parsi",
+      "price_range": "₹₹",
+      "rating": "4.4",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 46,
+    "fields": {
+      "name": "Trishna",
+      "destination": "Mumbai",
+      "cuisine": "Seafood",
+      "price_range": "₹₹₹",
+      "rating": "4.5",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 47,
+    "fields": {
+      "name": "Shree Thaker Bhojonalay",
+      "destination": "Mumbai",
+      "cuisine": "Gujarati",
+      "price_range": "₹₹",
+      "rating": "4.6",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 48,
+    "fields": {
+      "name": "Aaswad",
+      "destination": "Mumbai",
+      "cuisine": "Maharashtrian",
+      "price_range": "₹₹",
+      "rating": "4.4",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 49,
+    "fields": {
+      "name": "Bademiya",
+      "destination": "Mumbai",
+      "cuisine": "Mughlai",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 50,
+    "fields": {
+      "name": "Cafe Madras",
+      "destination": "Mumbai",
+      "cuisine": "South Indian",
+      "price_range": "₹",
+      "rating": "4.3",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 51,
+    "fields": {
+      "name": "Johnson's Cafe",
+      "destination": "Manali",
+      "cuisine": "Continental",
+      "price_range": "₹₹₹",
+      "rating": "4.4",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 52,
+    "fields": {
+      "name": "Chopsticks",
+      "destination": "Manali",
+      "cuisine": "Tibetan",
+      "price_range": "₹₹",
+      "rating": "4.3",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 53,
+    "fields": {
+      "name": "Rasta Cafe",
+      "destination": "Manali",
+      "cuisine": "Indian",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 54,
+    "fields": {
+      "name": "The Corner House",
+      "destination": "Manali",
+      "cuisine": "Multi-Cuisine",
+      "price_range": "₹₹",
+      "rating": "4.2",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 55,
+    "fields": {
+      "name": "Cafe 1947",
+      "destination": "Manali",
+      "cuisine": "Italian",
+      "price_range": "₹₹₹",
+      "rating": "4.4",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 56,
+    "fields": {
+      "name": "Renaissance",
+      "destination": "Manali",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.0",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 57,
+    "fields": {
+      "name": "Wake & Bake Cafe",
+      "destination": "Shimla",
+      "cuisine": "Cafe",
+      "price_range": "₹₹",
+      "rating": "4.4",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 58,
+    "fields": {
+      "name": "Indian Coffee House",
+      "destination": "Shimla",
+      "cuisine": "Indian",
+      "price_range": "₹",
+      "rating": "4.2",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 59,
+    "fields": {
+      "name": "Baljees Restaurant",
+      "destination": "Shimla",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 60,
+    "fields": {
+      "name": "Himani's",
+      "destination": "Shimla",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.0",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 61,
+    "fields": {
+      "name": "Eighteen71 Cookhouse",
+      "destination": "Shimla",
+      "cuisine": "Multi-Cuisine",
+      "price_range": "₹₹₹",
+      "rating": "4.3",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 62,
+    "fields": {
+      "name": "Sita Ram & Sons",
+      "destination": "Shimla",
+      "cuisine": "Indian",
+      "price_range": "₹",
+      "rating": "4.2",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 63,
+    "fields": {
+      "name": "Chotiwala",
+      "destination": "Rishikesh",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.2",
+      "food_type": "vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 64,
+    "fields": {
+      "name": "Little Buddha Cafe",
+      "destination": "Rishikesh",
+      "cuisine": "Multi-Cuisine",
+      "price_range": "₹₹",
+      "rating": "4.4",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 65,
+    "fields": {
+      "name": "The 60's Cafe",
+      "destination": "Rishikesh",
+      "cuisine": "Continental",
+      "price_range": "₹₹",
+      "rating": "4.3",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 66,
+    "fields": {
+      "name": "Bistro Nirvana",
+      "destination": "Rishikesh",
+      "cuisine": "Italian",
+      "price_range": "₹₹₹",
+      "rating": "4.4",
+      "food_type": "both"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 67,
+    "fields": {
+      "name": "Rawat Restaurant",
+      "destination": "Rishikesh",
+      "cuisine": "North Indian",
+      "price_range": "₹₹",
+      "rating": "4.1",
+      "food_type": "non_vegetarian"
+    }
+  },
+  {
+    "model": "planner.restaurant",
+    "pk": 68,
+    "fields": {
+      "name": "Ganga View Restaurant",
+      "destination": "Rishikesh",
+      "cuisine": "Indian",
+      "price_range": "₹₹",
+      "rating": "4.0",
+      "food_type": "vegetarian"
+    }
+  }
+]

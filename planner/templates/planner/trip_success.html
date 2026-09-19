@@ -1,0 +1,158 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'planner/css/style.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Trip Created | TravelAI</title>
+
+    <style>
+
+        body {
+            margin: 0;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #080b16;
+
+            color: white;
+
+            font-family: Arial, sans-serif;
+        }
+
+        .success-card {
+            width: 90%;
+            max-width: 600px;
+
+            padding: 50px;
+
+            text-align: center;
+
+            background: #141828;
+
+            border: 1px solid #292e42;
+
+            border-radius: 22px;
+        }
+
+        .success-icon {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #9299aa;
+        }
+
+        .trip-details {
+            margin-top: 30px;
+
+            text-align: left;
+
+            background: #0e1220;
+
+            padding: 22px;
+
+            border-radius: 14px;
+
+            line-height: 2;
+        }
+
+        .trip-details strong {
+            color: #a78bfa;
+        }
+
+        
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="success-card">
+
+    <div class="success-icon">
+        ✨
+    </div>
+
+    <h1>
+        Trip Created Successfully!
+    </h1>
+
+    <p>
+        Your trip details have been saved.
+        AI planning will use these preferences.
+    </p>
+
+    <div class="trip-details">
+
+        <div>
+            <strong>Destination:</strong>
+            {{ trip.destination }}
+        </div>
+
+        <div>
+            <strong>Days:</strong>
+            {{ trip.days }}
+        </div>
+
+        <div>
+            <strong>People:</strong>
+            {{ trip.people }}
+        </div>
+
+        <div>
+            <strong>Budget:</strong>
+            ₹{{ trip.budget }}
+        </div>
+
+        <div>
+            <strong>Food:</strong>
+            {{ trip.get_food_preference_display }}
+        </div>
+
+        <div>
+            <strong>Travel Type:</strong>
+            {{ trip.get_travel_type_display }}
+        </div>
+
+        <div>
+            <strong>Interests:</strong>
+            {{ trip.interests }}
+        </div>
+
+    </div>
+   <div class="success-actions">
+
+    <a href="{% url 'trip_result' trip.id %}" class="ai-plan-btn">
+        ✨ View My AI Trip Plan →
+    </a>
+
+    <a href="{% url 'home' %}" class="back-home-btn">
+        ← Back to Home
+    </a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

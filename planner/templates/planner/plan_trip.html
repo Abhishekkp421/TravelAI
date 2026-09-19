@@ -1,0 +1,222 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Plan Your Trip | TravelAI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'planner/css/style.css' %}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <span class="logo-icon">✈</span>
+
+        <span>
+            Travel<span class="logo-ai">AI</span>
+        </span>
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/#features">Features</a>
+
+        <a href="/#how-it-works">How It Works</a>
+
+        <a href="/admin/">Admin</a>
+
+    </div>
+
+</nav>
+
+
+<section class="planner-page">
+
+    <div class="planner-header">
+
+        <div class="badge">
+            ✦ AI TRIP PLANNER
+        </div>
+
+        <h1>
+            Plan your
+            <span>perfect journey.</span>
+        </h1>
+
+        <p>
+            Tell us about your trip and our AI will create
+            a personalized travel experience for you.
+        </p>
+
+    </div>
+
+
+    <div class="planner-card">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <div class="form-section">
+
+                <h2>📍 Where are you going?</h2>
+
+                <p class="form-description">
+                    Choose your destination.
+                </p>
+
+                <div class="field">
+
+                    <label>
+                        Destination
+                    </label>
+
+                    {{ form.destination }}
+
+                    {% if form.destination.errors %}
+                        <div class="form-error">
+                            {{ form.destination.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="field">
+
+                    <label>
+                        Number of Days
+                    </label>
+
+                    {{ form.days }}
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Number of People
+                    </label>
+
+                    {{ form.people }}
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Your Budget (₹)
+                    </label>
+
+                    {{ form.budget }}
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Food Preference
+                    </label>
+
+                    {{ form.food_preference }}
+
+                </div>
+
+
+                <div class="field full-width">
+
+                    <label>
+                        Travel Type
+                    </label>
+
+                    {{ form.travel_type }}
+
+                </div>
+
+            </div>
+
+
+            <div class="form-section interests-section">
+
+                <h2>✨ What are you interested in?</h2>
+
+                <p class="form-description">
+                    Select one or more interests.
+                </p>
+
+                <div class="interest-grid">
+
+                    {% for checkbox in form.interests %}
+
+                        <label class="interest-item">
+
+                            {{ checkbox.tag }}
+
+                            <span>
+                                {{ checkbox.choice_label }}
+                            </span>
+
+                        </label>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <button type="submit"
+                    class="generate-btn">
+
+                Generate My Trip
+
+                <span>✦</span>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ✈ Travel<span>AI</span>
+    </div>
+
+    <p>
+        AI-Based Personalized Travel, Food & Budget Planning System
+    </p>
+
+</footer>
+
+
+</body>
+</html>
