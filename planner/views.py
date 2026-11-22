@@ -1,8 +1,11 @@
+from .geocoding import get_coordinates
+from types import SimpleNamespace
+from .gemini_service import generate_ai_trip_plan
 from decimal import Decimal
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Avg
 
 from .models import Trip, Place, Restaurant, Review
@@ -190,14 +193,16 @@ def plan_trip(request):
 # TRIP RESULT
 # -------------------------------------------------
 
+
+
+
+
+
 @login_required
 def trip_result(request, trip_id):
 
-    # -------------------------------------------------
-    # GET TRIP
-    # -------------------------------------------------
-
-    trip = Trip.objects.get(
+    trip = get_object_or_404(
+        Trip,
         id=trip_id,
         user=request.user
     )
@@ -208,51 +213,32 @@ def trip_result(request, trip_id):
 
     interests = [
         interest.strip().lower()
-        for interest in trip.interests.split(",")
+        for interest in (trip.interests or "").split(",")
         if interest.strip()
     ]
 
     # -------------------------------------------------
-    # ALL PLACES FOR DESTINATION
+    # DATABASE PLACES
     # -------------------------------------------------
 
     all_places = Place.objects.filter(
         destination__iexact=trip.destination
     ).order_by("-rating")
 
-    # -------------------------------------------------
-    # AI PLACE RECOMMENDATION SCORING
-    # -------------------------------------------------
-
     scored_places = []
 
     for place in all_places:
 
         score = 0
-
-        category = place.category.lower()
-
-        # -------------------------------------------------
-        # INTEREST MATCHING
-        # -------------------------------------------------
+        category = (place.category or "").lower()
 
         for interest in interests:
-
             if interest in category:
                 score += 10
 
-        # -------------------------------------------------
-        # RATING SCORE
-        # -------------------------------------------------
+        score += float(place.rating or 0) * 2
 
-        score += float(place.rating) * 2
-
-        # -------------------------------------------------
-        # BUDGET CONSIDERATION
-        # -------------------------------------------------
-
-        if place.average_cost:
-
+        if place.average_cost is not None:
             estimated_cost = (
                 float(place.average_cost) * trip.people
             )
@@ -262,93 +248,50 @@ def trip_result(request, trip_id):
             else:
                 score -= 2
 
-        # -------------------------------------------------
-        # TRAVEL TYPE PERSONALIZATION
-        # -------------------------------------------------
+        travel_type = (trip.travel_type or "").lower()
 
-        travel_type = trip.travel_type.lower()
-
-        # FAMILY
         if travel_type == "family":
-
-            if any(
-                word in category
-                for word in [
-                    "historical",
-                    "spiritual",
-                    "nature",
-                    "scenic"
-                ]
-            ):
+            if any(word in category for word in [
+                "historical", "spiritual", "nature", "scenic"
+            ]):
                 score += 5
 
-        # COUPLE
         elif travel_type == "couple":
-
-            if any(
-                word in category
-                for word in [
-                    "scenic",
-                    "nature",
-                    "romantic"
-                ]
-            ):
+            if any(word in category for word in [
+                "scenic", "nature", "romantic"
+            ]):
                 score += 5
 
-        # FRIENDS
         elif travel_type == "friends":
-
-            if any(
-                word in category
-                for word in [
-                    "adventure",
-                    "shopping",
-                    "nature"
-                ]
-            ):
+            if any(word in category for word in [
+                "adventure", "shopping", "nature"
+            ]):
                 score += 5
 
-        # SOLO
         elif travel_type == "solo":
-
-            if any(
-                word in category
-                for word in [
-                    "adventure",
-                    "historical",
-                    "spiritual",
-                    "shopping"
-                ]
-            ):
+            if any(word in category for word in [
+                "adventure", "historical", "spiritual", "shopping"
+            ]):
                 score += 5
 
-        # -------------------------------------------------
-        # SAVE PLACE WITH SCORE
-        # -------------------------------------------------
-
-        scored_places.append(
-            (place, score)
-        )
-
-    # -------------------------------------------------
-    # SORT PLACES BY AI SCORE
-    # -------------------------------------------------
+        scored_places.append((place, score))
 
     scored_places.sort(
         key=lambda item: item[1],
         reverse=True
     )
 
-    # -------------------------------------------------
-    # FINAL RECOMMENDED PLACES
-    # -------------------------------------------------
-
     recommended_places = [
-        place
-        for place, score in scored_places
-   ]
+        place for place, score in scored_places
+    ]
+
+    # -------------------------------------------------
+    # DATABASE PLACE REVIEWS
+    # -------------------------------------------------
 
     for place in recommended_places:
+
+        place.is_ai_generated = False
 
         place.user_reviews = Review.objects.filter(
             place=place
@@ -361,16 +304,12 @@ def trip_result(request, trip_id):
         )["average"]
 
     # -------------------------------------------------
-    # RESTAURANT RECOMMENDATIONS
+    # DATABASE RESTAURANTS
     # -------------------------------------------------
 
     restaurants = Restaurant.objects.filter(
         destination__iexact=trip.destination
     )
-
-    # -------------------------------------------------
-    # AI RESTAURANT RECOMMENDATION SCORING
-    # -------------------------------------------------
 
     scored_restaurants = []
 
@@ -378,41 +317,33 @@ def trip_result(request, trip_id):
 
         score = 0
 
-        # Food preference match
         if restaurant.food_type == trip.food_preference:
             score += 10
 
-        # Both is suitable for everyone
         if restaurant.food_type == "both":
             score += 7
 
-        # Rating score
-        score += float(restaurant.rating) * 2
+        score += float(restaurant.rating or 0) * 2
 
-        # Save restaurant with score
-        scored_restaurants.append(
-            (restaurant, score)
-        )
-
-    # -------------------------------------------------
-    # SORT RESTAURANTS BY AI SCORE
-    # -------------------------------------------------
+        scored_restaurants.append((restaurant, score))
 
     scored_restaurants.sort(
         key=lambda item: item[1],
         reverse=True
     )
 
-   # -------------------------------------------------
-   # FINAL RECOMMENDED RESTAURANTS
-   # -------------------------------------------------
-
     recommended_restaurants = [
         restaurant
         for restaurant, score in scored_restaurants
-   ]
+    ]
+
+    # -------------------------------------------------
+    # RESTAURANT REVIEWS
+    # -------------------------------------------------
 
     for restaurant in recommended_restaurants:
+
+        restaurant.is_ai_generated = False
 
         restaurant.user_reviews = Review.objects.filter(
             restaurant=restaurant
@@ -422,110 +353,256 @@ def trip_result(request, trip_id):
 
         restaurant.user_average = restaurant.user_reviews.aggregate(
             average=Avg("rating")
-    )["average"]
-
-    total_budget = Decimal(trip.budget)
+        )["average"]
 
     # -------------------------------------------------
-    # BUDGET BREAKDOWN
+    # GEMINI AI TRIP PLAN
     # -------------------------------------------------
 
-    total_budget = Decimal(trip.budget)
-
-    hotel_budget = (
-        total_budget * Decimal("0.30")
+    ai_plan = generate_ai_trip_plan(
+        trip,
+        recommended_places,
+        recommended_restaurants
     )
-
-    food_budget = (
-        total_budget * Decimal("0.20")
-    )
-
-    travel_budget = (
-        total_budget * Decimal("0.15")
-    )
-
-    activity_budget = (
-        total_budget * Decimal("0.25")
-    )
-
-    misc_budget = (
-        total_budget * Decimal("0.10")
-    )
-
-    # -------------------------------------------------
-    # DAY-WISE AI ITINERARY
-    # -------------------------------------------------
 
     itinerary = []
+    itinerary_source = "Rule-based fallback"
 
-    place_index = 0
-    restaurant_index = 0
+    if ai_plan:
 
-    for day in range(1, trip.days + 1):
+        database_place_map = {
+            p.name.strip().lower(): p
+            for p in recommended_places
+        }
 
-        morning = None
-        afternoon = None
-        evening = None
-        restaurant = None
-
-        # -------------------------------------------------
-        # MORNING
-        # -------------------------------------------------
-
-        if place_index < len(recommended_places):
-
-            morning = recommended_places[place_index]
-
-            place_index += 1
+        database_restaurant_map = {
+            r.name.strip().lower(): r
+            for r in recommended_restaurants
+        }
 
         # -------------------------------------------------
-        # AFTERNOON
+        # FINAL PLACES
         # -------------------------------------------------
 
-        if place_index < len(recommended_places):
+        final_places = []
 
-            afternoon = recommended_places[place_index]
+        for item in ai_plan.get("places", []):
 
-            place_index += 1
+            if not isinstance(item, dict) or not item.get("name"):
+                continue
+
+            place_name = item["name"].strip().lower()
+
+            if item.get("source") == "database":
+
+                place = database_place_map.get(place_name)
+
+                if place:
+                    place.is_ai_generated = False
+                    final_places.append(place)
+
+            else:
+
+                final_places.append(
+                    SimpleNamespace(
+                        id=None,
+                        name=item["name"],
+                        category=item.get(
+                            "category",
+                            "Attraction"
+                        ),
+                        description=item.get(
+                            "description",
+                            ""
+                        ),
+                        average_cost=item.get(
+                            "average_cost"
+                        ),
+                        rating=None,
+                        latitude=None,
+                        longitude=None,
+                        is_ai_generated=True,
+                        review_count=0,
+                        user_reviews=[],
+                        user_average=None,
+                    )
+                )
 
         # -------------------------------------------------
-        # EVENING
+        # FINAL RESTAURANTS
         # -------------------------------------------------
 
-        if place_index < len(recommended_places):
+        final_restaurants = []
 
-            evening = recommended_places[place_index]
+        for item in ai_plan.get("restaurants", []):
 
-            place_index += 1
+            if not isinstance(item, dict) or not item.get("name"):
+                continue
 
-        # -------------------------------------------------
-        # FOOD RECOMMENDATION
-        # -------------------------------------------------
+            restaurant_name = item["name"].strip().lower()
 
-        if restaurant_index < len(recommended_restaurants):
+            if item.get("source") == "database":
 
-            restaurant = recommended_restaurants[
-                restaurant_index
-            ]
+                restaurant = database_restaurant_map.get(
+                    restaurant_name
+                )
 
-            restaurant_index += 1
+                if restaurant:
+                    restaurant.is_ai_generated = False
+                    final_restaurants.append(restaurant)
 
-        # -------------------------------------------------
-        # ADD DAY
-        # -------------------------------------------------
+            else:
 
-        itinerary.append(
-            {
+                final_restaurants.append(
+                    SimpleNamespace(
+                        id=None,
+                        name=item["name"],
+                        cuisine=item.get(
+                            "cuisine",
+                            "Indian"
+                        ),
+                        food_type=item.get(
+                            "food_type",
+                            "both"
+                        ),
+                        price_range=item.get(
+                            "price_range"
+                        ),
+                        rating=None,
+                        latitude=None,
+                        longitude=None,
+                        is_ai_generated=True,
+                        review_count=0,
+                        user_reviews=[],
+                        user_average=None,
+                    )
+                )
+
+        if final_places:
+            recommended_places = final_places
+
+        if final_restaurants:
+            recommended_restaurants = final_restaurants
+
+        itinerary = ai_plan.get("itinerary", [])
+
+        if itinerary:
+            itinerary_source = "Gemini AI"
+
+    # -------------------------------------------------
+    # GEOCODING - PLACES
+    # -------------------------------------------------
+
+    for place in recommended_places:
+
+        if (
+            getattr(place, "latitude", None) is None
+            or getattr(place, "longitude", None) is None
+        ):
+
+            coordinates = get_coordinates(
+                place.name,
+                trip.destination
+            )
+
+            if coordinates:
+
+                place.latitude = coordinates["latitude"]
+                place.longitude = coordinates["longitude"]
+
+                if place.id is not None:
+                    place.save(
+                        update_fields=[
+                            "latitude",
+                            "longitude"
+                        ]
+                    )
+
+    # -------------------------------------------------
+    # GEOCODING - RESTAURANTS
+    # -------------------------------------------------
+
+    for restaurant in recommended_restaurants:
+
+        if (
+            getattr(restaurant, "latitude", None) is None
+            or getattr(restaurant, "longitude", None) is None
+        ):
+
+            coordinates = get_coordinates(
+                restaurant.name,
+                trip.destination
+            )
+
+            if coordinates:
+
+                restaurant.latitude = coordinates["latitude"]
+                restaurant.longitude = coordinates["longitude"]
+
+                if restaurant.id is not None:
+                    restaurant.save(
+                        update_fields=[
+                            "latitude",
+                            "longitude"
+                        ]
+                    )
+
+    # -------------------------------------------------
+    # FALLBACK ITINERARY
+    # -------------------------------------------------
+
+    if not itinerary:
+
+        place_index = 0
+        restaurant_index = 0
+
+        for day in range(1, trip.days + 1):
+
+            morning = None
+            afternoon = None
+            evening = None
+            restaurant = None
+
+            if place_index < len(recommended_places):
+                morning = recommended_places[place_index]
+                place_index += 1
+
+            if place_index < len(recommended_places):
+                afternoon = recommended_places[place_index]
+                place_index += 1
+
+            if place_index < len(recommended_places):
+                evening = recommended_places[place_index]
+                place_index += 1
+
+            if restaurant_index < len(recommended_restaurants):
+                restaurant = recommended_restaurants[
+                    restaurant_index
+                ]
+                restaurant_index += 1
+
+            itinerary.append({
                 "day": day,
                 "morning": morning,
                 "afternoon": afternoon,
                 "restaurant": restaurant,
                 "evening": evening,
-            }
-        )
+            })
 
     # -------------------------------------------------
-    # AI RECOMMENDATION MESSAGE
+    # BUDGET BREAKDOWN
+    # -------------------------------------------------
+
+    total_budget = Decimal(str(trip.budget))
+
+    hotel_budget = total_budget * Decimal("0.30")
+    food_budget = total_budget * Decimal("0.20")
+    travel_budget = total_budget * Decimal("0.15")
+    activity_budget = total_budget * Decimal("0.25")
+    misc_budget = total_budget * Decimal("0.10")
+
+    # -------------------------------------------------
+    # RECOMMENDATION MESSAGE
     # -------------------------------------------------
 
     if interests:
@@ -536,17 +613,15 @@ def trip_result(request, trip_id):
         )
 
         recommendation_message = (
-            f"Your trip is personalized around "
-            f"{interest_text} interests. "
-            f"We selected highly-rated places "
-            f"and restaurants that match your trip."
+            f"Your trip is personalized around {interest_text} "
+            f"interests, your budget and your travel preferences."
         )
 
     else:
 
         recommendation_message = (
-            "Your itinerary is optimized using "
-            "high-rated places and your trip preferences."
+            "Your trip is personalized using your destination, "
+            "budget and travel preferences."
         )
 
     # -------------------------------------------------
@@ -554,49 +629,27 @@ def trip_result(request, trip_id):
     # -------------------------------------------------
 
     context = {
-
         "trip": trip,
-
-        "recommended_places":
-            recommended_places,
-
-        "recommended_restaurants":
-            recommended_restaurants,
-
-        "itinerary":
-            itinerary,
-
-        "recommendation_message":
-            recommendation_message,
-
-        "hotel_budget":
-            hotel_budget,
-
-        "food_budget":
-            food_budget,
-
-        "travel_budget":
-            travel_budget,
-
-        "activity_budget":
-            activity_budget,
-
-        "misc_budget":
-            misc_budget,
-
-        "total_budget":
-            total_budget,
+        "recommended_places": recommended_places,
+        "recommended_restaurants": recommended_restaurants,
+        "itinerary": itinerary,
+        "itinerary_source": itinerary_source,
+        "recommendation_message": recommendation_message,
+        "hotel_budget": hotel_budget,
+        "food_budget": food_budget,
+        "travel_budget": travel_budget,
+        "activity_budget": activity_budget,
+        "misc_budget": misc_budget,
+        "total_budget": total_budget,
     }
-
-    # -------------------------------------------------
-    # RENDER RESULT PAGE
-    # -------------------------------------------------
 
     return render(
         request,
         "planner/trip_result.html",
         context
     )
+
+
 @login_required
 def add_review(request, place_id=None, restaurant_id=None):
 

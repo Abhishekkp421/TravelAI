@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -43,17 +44,24 @@ class Place(models.Model):
     name = models.CharField(max_length=150)
     destination = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
+
     average_cost = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         default=0
     )
+
     rating = models.DecimalField(
         max_digits=3,
         decimal_places=1,
         default=0
     )
+
     description = models.TextField(blank=True)
+
+    # Geographic coordinates for Leaflet map
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -70,15 +78,21 @@ class Restaurant(models.Model):
     destination = models.CharField(max_length=100)
     cuisine = models.CharField(max_length=100)
     price_range = models.CharField(max_length=50)
+
     rating = models.DecimalField(
         max_digits=3,
         decimal_places=1,
         default=0
     )
+
     food_type = models.CharField(
         max_length=30,
         choices=FOOD_TYPE_CHOICES
     )
+
+    # Geographic coordinates for Leaflet map
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.name

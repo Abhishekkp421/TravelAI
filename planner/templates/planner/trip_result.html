@@ -1,22 +1,24 @@
+
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AI Trip Plan | TravelAI</title>
 
-    <link rel="stylesheet"
-          href="{% static 'planner/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'planner/css/style.css' %}">
+
+    <!-- LEAFLET CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
 
     <style>
-
         .result-page {
             max-width: 1200px;
             margin: 0 auto;
@@ -54,7 +56,6 @@
             font-size: 16px;
         }
 
-
         /* SUMMARY */
 
         .trip-summary {
@@ -82,17 +83,14 @@
             font-size: 20px;
         }
 
-
         /* AI MESSAGE */
 
         .ai-message {
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(104, 62, 220, .18),
-                    rgba(41, 30, 83, .18)
-                );
-
+            background: linear-gradient(
+                135deg,
+                rgba(104, 62, 220, .18),
+                rgba(41, 30, 83, .18)
+            );
             border: 1px solid #4c3588;
             border-radius: 20px;
             padding: 25px;
@@ -107,8 +105,14 @@
         .ai-message p {
             margin: 0;
             color: #b2bbcd;
+            line-height: 1.7;
         }
 
+        .ai-source {
+            margin-top: 12px !important;
+            color: #b88cff !important;
+            font-weight: 600;
+        }
 
         /* SECTION */
 
@@ -130,8 +134,7 @@
             color: #858da1;
         }
 
-
-        /* PLACE CARDS */
+        /* PLACES */
 
         .places-grid {
             display: grid;
@@ -171,6 +174,8 @@
         .place-bottom {
             display: flex;
             justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
             margin-top: 18px;
             padding-top: 15px;
             border-top: 1px solid #252b3c;
@@ -179,188 +184,202 @@
         .place-cost {
             color: white;
             font-weight: 600;
+            font-size: 13px;
         }
 
         .place-rating {
             color: #fbbf24;
+            font-size: 13px;
         }
- /* COMPACT REVIEWS */
 
-.review-details {
-    margin-top: 18px;
-    padding-top: 14px;
-    border-top: 1px solid #252b3c;
-}
+        /* REVIEWS */
 
-.review-details summary {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    list-style: none;
-}
+        .review-details {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid #252b3c;
+        }
 
-.review-details summary > span:first-child {
-    white-space: nowrap;
-}
+        .review-details summary {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            list-style: none;
+        }
 
-.review-details .review-count {
-    margin-left: auto;
-    margin-right: 4px;
-}
+        .review-details summary > span:first-child {
+            white-space: nowrap;
+        }
 
-.review-details summary::-webkit-details-marker {
-    display: none;
-}
+        .review-details .review-count {
+            margin-left: auto;
+            margin-right: 4px;
+        }
 
-.review-details summary::after {
-    content: "＋";
-    color: #a970ff;
-    font-size: 18px;
-}
+        .review-details summary::-webkit-details-marker {
+            display: none;
+        }
 
-.review-details[open] summary::after {
-    content: "−";
-}
+        .review-details summary::after {
+            content: "＋";
+            color: #a970ff;
+            font-size: 18px;
+        }
 
-.review-count {
-    color: #858da1;
-    font-size: 12px;
-    font-weight: 500;
-}
+        .review-details[open] summary::after {
+            content: "−";
+        }
 
-.review-box {
-    margin-top: 15px;
-}
+        .review-count {
+            color: #858da1;
+            font-size: 12px;
+            font-weight: 500;
+        }
 
-.review-box h4 {
-    color: white;
-    font-size: 15px;
-    margin: 0 0 12px;
-}
+        .review-box {
+            margin-top: 15px;
+        }
 
-.review-fields {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+        .review-box h4 {
+            color: white;
+            font-size: 15px;
+            margin: 0 0 12px;
+        }
 
-.review-fields input,
-.review-fields textarea {
-    width: 100%;
-    padding: 11px 12px;
-    box-sizing: border-box;
-    border-radius: 9px;
-    border: 1px solid #2b3143;
-    background: #0c1020;
-    color: white;
-    font-size: 13px;
-    outline: none;
-}
+        .review-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-.review-fields input {
-    height: 42px;
-}
+        .review-fields input,
+        .review-fields textarea {
+            width: 100%;
+            padding: 11px 12px;
+            box-sizing: border-box;
+            border-radius: 9px;
+            border: 1px solid #2b3143;
+            background: #0c1020;
+            color: white;
+            font-size: 13px;
+            outline: none;
+        }
 
-.review-fields textarea {
-    resize: vertical;
-    min-height: 75px;
-    font-family: inherit;
-}
+        .review-fields input {
+            height: 42px;
+        }
 
-.review-fields input:focus,
-.review-fields textarea:focus {
-    border-color: #8b5cf6;
-    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.12);
-}
+        .review-fields textarea {
+            resize: vertical;
+            min-height: 75px;
+            font-family: inherit;
+        }
 
-.review-fields input::placeholder,
-.review-fields textarea::placeholder {
-    color: #687086;
-}
+        .review-fields input:focus,
+        .review-fields textarea:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.12);
+        }
 
-.review-submit {
-    width: 100%;
-    padding: 11px;
-    border: none;
-    border-radius: 9px;
-    background: linear-gradient(135deg, #7047ff, #994cff);
-    color: white;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-}
+        .review-fields input::placeholder,
+        .review-fields textarea::placeholder {
+            color: #687086;
+        }
 
-.existing-reviews {
-    margin-top: 18px;
-}
+        .review-submit {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(135deg, #7047ff, #994cff);
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
-.reviews-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
+        .existing-reviews {
+            margin-top: 18px;
+        }
 
-.reviews-header h4 {
-    margin: 0;
-    color: white;
-    font-size: 14px;
-}
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
 
-.average-rating {
-    color: #fbbf24;
-    font-size: 13px;
-    font-weight: 600;
-}
+        .reviews-header h4 {
+            margin: 0;
+            color: white;
+            font-size: 14px;
+        }
 
-.review-item {
-    background: #191e2d;
-    border: 1px solid #2b3143;
-    border-radius: 10px;
-    padding: 11px;
-    margin-top: 8px;
-}
+        .average-rating {
+            color: #fbbf24;
+            font-size: 13px;
+            font-weight: 600;
+        }
 
-.review-user {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .review-item {
+            background: #191e2d;
+            border: 1px solid #2b3143;
+            border-radius: 10px;
+            padding: 11px;
+            margin-top: 8px;
+        }
 
-.review-user strong {
-    color: white;
-    font-size: 13px;
-}
+        .review-user {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.review-stars {
-    color: #fbbf24;
-    font-size: 12px;
-    letter-spacing: 1px;
-}
+        .review-user strong {
+            color: white;
+            font-size: 13px;
+        }
 
-.review-item p {
-    color: #b9c1d2;
-    font-size: 13px;
-    margin: 7px 0;
-    line-height: 1.5;
-}
+        .review-stars {
+            color: #fbbf24;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
 
-.review-item small {
-    color: #687086;
-    font-size: 11px;
-}
+        .review-item p {
+            color: #b9c1d2;
+            font-size: 13px;
+            margin: 7px 0;
+            line-height: 1.5;
+        }
 
-.no-reviews {
-    color: #687086;
-    font-size: 12px;
-    margin-top: 10px;
-}
+        .review-item small {
+            color: #687086;
+            font-size: 11px;
+        }
 
+        .no-reviews {
+            color: #687086;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .ai-generated-note {
+            color: #a970ff;
+            font-size: 12px;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .unverified {
+            color: #858da1;
+            font-size: 12px;
+        }
 
         /* RESTAURANTS */
 
@@ -385,18 +404,108 @@
         .restaurant-info {
             color: #858da1;
             margin-bottom: 14px;
+            line-height: 1.6;
+            font-size: 14px;
         }
 
         .restaurant-bottom {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
             color: #a970ff;
         }
 
         .restaurant-rating {
             color: #fbbf24;
+            font-size: 13px;
         }
 
+        /* MAP */
+
+        .map-container {
+            background: #111522;
+            border: 1px solid #252b3c;
+            border-radius: 20px;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        #travel-map {
+            width: 100%;
+            height: 480px;
+            border-radius: 13px;
+            z-index: 1;
+            background: #191e2d;
+        }
+
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            padding: 15px 5px 3px;
+            color: #b9c1d2;
+            font-size: 13px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .place-dot {
+            background: #9747ff;
+        }
+
+        .restaurant-dot {
+            background: #22c55e;
+        }
+
+        .map-note {
+            color: #858da1;
+            font-size: 12px;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        .map-empty {
+            display: none;
+            color: #b9c1d2;
+            text-align: center;
+            padding: 25px;
+            background: #191e2d;
+            border-radius: 12px;
+            margin-top: 12px;
+        }
+
+        .leaflet-popup-content-wrapper,
+        .leaflet-popup-tip {
+            background: #111522;
+            color: white;
+        }
+
+        .map-popup-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .map-popup-type {
+            color: #b88cff;
+            font-size: 12px;
+        }
+
+        .leaflet-container a {
+            color: #a970ff;
+        }
 
         /* BUDGET */
 
@@ -427,11 +536,7 @@
 
         .budget-total {
             margin-top: 18px;
-            background: linear-gradient(
-                135deg,
-                #7047ff,
-                #994cff
-            );
+            background: linear-gradient(135deg, #7047ff, #994cff);
             border-radius: 18px;
             padding: 22px;
             display: flex;
@@ -448,7 +553,6 @@
             color: white;
             font-size: 26px;
         }
-
 
         /* ITINERARY */
 
@@ -505,114 +609,83 @@
 
         /* PROFESSIONAL ITINERARY */
 
-.day-label {
-    display: block;
-    color: #a970ff;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-}
+        .day-label {
+            display: block;
+            color: #a970ff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
 
-.schedule-item {
-    display: flex;
-    gap: 18px;
-    padding: 18px;
-    margin-top: 12px;
-    background: #191e2d;
-    border: 1px solid #2b3143;
-    border-radius: 14px;
-    transition: 0.2s ease;
-}
+        .schedule-item {
+            display: flex;
+            gap: 18px;
+            padding: 18px;
+            margin-top: 12px;
+            background: #191e2d;
+            border: 1px solid #2b3143;
+            border-radius: 14px;
+            transition: 0.2s ease;
+        }
 
-.schedule-item:hover {
-    border-color: #6941c6;
-    transform: translateY(-2px);
-}
+        .schedule-item:hover {
+            border-color: #6941c6;
+            transform: translateY(-2px);
+        }
 
-.schedule-icon {
-    width: 46px;
-    height: 46px;
-    min-width: 46px;
-    border-radius: 12px;
-    background: #24194d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 23px;
-}
+        .schedule-icon {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            border-radius: 12px;
+            background: #24194d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+        }
 
-.schedule-content {
-    flex: 1;
-}
+        .schedule-content {
+            flex: 1;
+        }
 
-.schedule-time {
-    display: block;
-    color: #a970ff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
-}
+        .schedule-time {
+            display: block;
+            color: #a970ff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
 
-.schedule-content h4 {
-    color: white;
-    font-size: 18px;
-    margin: 0 0 7px;
-}
+        .schedule-content h4 {
+            color: white;
+            font-size: 18px;
+            margin: 0 0 7px;
+        }
 
-.schedule-content p {
-    color: #858da1;
-    font-size: 14px;
-    line-height: 1.6;
-    margin: 0 0 10px;
-}
+        .schedule-content p {
+            color: #858da1;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0 0 10px;
+        }
 
-.schedule-meta {
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-    color: #b9c1d2;
-    font-size: 13px;
-}
+        .schedule-meta {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            color: #b9c1d2;
+            font-size: 13px;
+        }
 
-.food-item {
-    border-color: #493477;
-    background: linear-gradient(
-        135deg,
-        #19162b,
-        #191e2d
-    );
-}
+        .food-item {
+            border-color: #493477;
+            background: linear-gradient(135deg, #19162b, #191e2d);
+        }
 
-
-/* MOBILE ITINERARY */
-
-@media (max-width: 600px) {
-
-    .schedule-item {
-        gap: 12px;
-        padding: 15px;
-    }
-
-    .schedule-icon {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-        font-size: 19px;
-    }
-
-    .schedule-content h4 {
-        font-size: 16px;
-    }
-
-    .schedule-meta {
-        gap: 10px;
-        flex-direction: column;
-    }
-
-}
-        /* FOOTER BUTTON */
+        /* FOOTER */
 
         .result-actions {
             text-align: center;
@@ -623,9 +696,9 @@
             text-decoration: none;
         }
 
+        /* RESPONSIVE */
 
         @media (max-width: 900px) {
-
             .trip-summary {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -637,12 +710,9 @@
             .budget-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
         }
 
-
         @media (max-width: 600px) {
-
             .result-page {
                 padding: 40px 15px;
             }
@@ -658,57 +728,57 @@
                 grid-template-columns: 1fr;
             }
 
+            #travel-map {
+                height: 350px;
+            }
+
+            .schedule-item {
+                gap: 12px;
+                padding: 15px;
+            }
+
+            .schedule-icon {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 19px;
+            }
+
+            .schedule-content h4 {
+                font-size: 16px;
+            }
+
+            .schedule-meta {
+                gap: 10px;
+                flex-direction: column;
+            }
         }
-
     </style>
-
 </head>
 
-
 <body>
-
 
     <!-- NAVIGATION -->
 
     <nav class="navbar">
 
         <div class="logo">
-
             <span class="logo-icon">✈</span>
-
             <span>
                 Travel<span class="logo-ai">AI</span>
             </span>
-
         </div>
 
-
         <div class="nav-links">
-
-            <a href="/">
-                Home
-            </a>
-
-            <a href="/#features">
-                Features
-            </a>
-
-            <a href="/#how-it-works">
-                How It Works
-            </a>
-
-            <a href="/admin/">
-                Admin
-            </a>
-
+            <a href="/">Home</a>
+            <a href="/#features">Features</a>
+            <a href="/#how-it-works">How It Works</a>
+            <a href="/admin/">Admin</a>
         </div>
 
     </nav>
 
-
-
     <main class="result-page">
-
 
         <!-- HEADER -->
 
@@ -719,10 +789,8 @@
             </div>
 
             <h1>
-
                 Your <span>{{ trip.destination }}</span>
                 Adventure
-
             </h1>
 
             <p>
@@ -732,259 +800,252 @@
 
         </div>
 
-
-
         <!-- SUMMARY -->
 
         <div class="trip-summary">
 
-
             <div class="summary-card">
-
                 <small>📍 Destination</small>
-
-                <strong>
-                    {{ trip.destination }}
-                </strong>
-
+                <strong>{{ trip.destination }}</strong>
             </div>
 
-
             <div class="summary-card">
-
                 <small>📅 Duration</small>
-
-                <strong>
-                    {{ trip.days }} Days
-                </strong>
-
+                <strong>{{ trip.days }} Days</strong>
             </div>
 
-
             <div class="summary-card">
-
                 <small>👥 Travelers</small>
-
-                <strong>
-                    {{ trip.people }} People
-                </strong>
-
+                <strong>{{ trip.people }} People</strong>
             </div>
-
 
             <div class="summary-card">
-
                 <small>💰 Your Budget</small>
-
-                <strong>
-                    ₹{{ total_budget|floatformat:0 }}
-                </strong>
-
+                <strong>₹{{ total_budget|floatformat:0 }}</strong>
             </div>
-
 
         </div>
-
-
 
         <!-- AI MESSAGE -->
 
         <div class="ai-message">
 
-            <h3>
-                ✨ AI Recommendation
-            </h3>
+            <h3>✨ AI Recommendation</h3>
 
-            <p>
-                {{ recommendation_message }}
-                We selected highly-rated places and
-                restaurants that match your trip.
+            <p>{{ recommendation_message }}</p>
+
+            <p class="ai-source">
+                ✨ Itinerary generated by: {{ itinerary_source }}
+            </p>
+
+            <p class="unverified" style="margin-top: 10px;">
+                Note: AI-generated ratings, prices and availability
+                are not independently verified.
             </p>
 
         </div>
-
-
 
         <!-- PLACES -->
 
         <section class="result-section">
 
-
             <div class="result-section-title">
-
-                <h2>
-                    📍 Recommended Places
-                </h2>
+                <h2>📍 Recommended Places</h2>
 
                 <p>
                     Places selected according to your
                     destination and interests.
                 </p>
-
             </div>
 
-
             <div class="places-grid">
-
 
                 {% for place in recommended_places %}
 
                 <div class="place-card">
 
+                    <div class="place-icon">🏛️</div>
 
-                    <div class="place-icon">
-                        🏛️
-                    </div>
-
-
-                    <h3>
-                        {{ place.name }}
-                    </h3>
-
+                    <h3>{{ place.name }}</h3>
 
                     <div class="place-category">
-                        {{ place.category }}
+                        {{ place.category|default:"Tourist Attraction" }}
                     </div>
 
-
                     <p class="place-description">
-
                         {% if place.description %}
                             {{ place.description }}
                         {% else %}
-                            Explore this popular
-                            destination attraction.
+                            Explore this popular destination attraction.
                         {% endif %}
-
                     </p>
 
+                    <!-- COST AND RATING -->
 
                     <div class="place-bottom">
 
-                        <span class="place-cost">
-                            ₹{{ place.average_cost|floatformat:0 }}
-                        </span>
+                        {% if place.is_ai_generated %}
 
-                        <span class="place-rating">
-                            ★ {{ place.rating }}
-                        </span>
+                            <span class="place-cost">
+                                {% if place.average_cost != None %}
+                                    Estimated Cost: ₹{{ place.average_cost|floatformat:0 }}
+                                {% else %}
+                                    Cost Unavailable
+                                {% endif %}
+                            </span>
+
+                            <span class="place-rating">
+                                AI Suggestion • Rating Unavailable
+                            </span>
+
+                        {% else %}
+
+                            <span class="place-cost">
+                                {% if place.average_cost != None %}
+                                    Database Cost: ₹{{ place.average_cost|floatformat:0 }}
+                                {% else %}
+                                    Cost Unavailable
+                                {% endif %}
+                            </span>
+
+                            <span class="place-rating">
+                                {% if place.rating %}
+                                    ★ {{ place.rating }} (Database)
+                                {% else %}
+                                    Rating Unavailable
+                                {% endif %}
+                            </span>
+
+                        {% endif %}
 
                     </div>
 
+                    <!-- PLACE REVIEWS -->
 
+                    {% if place.id %}
 
-<!-- REVIEWS -->
+                    <details class="review-details">
 
-<details class="review-details">
+                        <summary>
 
-    <summary>
-        <span>⭐ Reviews & Rating</span>
+                            <span>⭐ Reviews & Rating</span>
 
-        {% if place.review_count > 0 %}
-            <span class="review-count">
-                {{ place.review_count }} Review{{ place.review_count|pluralize }}
-            </span>
-        {% else %}
-            <span class="review-count">
-                No Reviews
-            </span>
-        {% endif %}
-    </summary>
+                            {% if place.review_count > 0 %}
 
+                                <span class="review-count">
+                                    {{ place.review_count }}
+                                    Review{{ place.review_count|pluralize }}
+                                </span>
 
-    <div class="review-box">
+                            {% else %}
 
-        <h4>Share Your Experience</h4>
+                                <span class="review-count">
+                                    No Reviews
+                                </span>
 
-        <form method="POST"
-              action="{% url 'add_place_review' place.id %}">
+                            {% endif %}
 
-            {% csrf_token %}
+                        </summary>
 
-            <div class="review-fields">
+                        <div class="review-box">
 
-                <input
-                    type="number"
-                    name="rating"
-                    min="1"
-                    max="5"
-                    placeholder="Rating (1-5)"
-                    required
-                >
+                            <h4>Share Your Experience</h4>
 
-                <textarea
-                    name="review_text"
-                    rows="3"
-                    placeholder="Write your experience..."
-                    required
-                ></textarea>
+                            <form method="POST"
+                                  action="{% url 'add_place_review' place.id %}">
 
-                <button type="submit" class="review-submit">
-                    Submit Review
-                </button>
+                                {% csrf_token %}
 
-            </div>
+                                <div class="review-fields">
 
-        </form>
+                                    <input
+                                        type="number"
+                                        name="rating"
+                                        min="1"
+                                        max="5"
+                                        placeholder="Rating (1-5)"
+                                        required
+                                    >
 
-    </div>
+                                    <textarea
+                                        name="review_text"
+                                        rows="3"
+                                        placeholder="Write your experience..."
+                                        required
+                                    ></textarea>
 
+                                    <button type="submit" class="review-submit">
+                                        Submit Review
+                                    </button>
 
-    <div class="existing-reviews">
+                                </div>
 
-        <div class="reviews-header">
+                            </form>
 
-            <h4>💬 User Reviews</h4>
+                        </div>
 
-            {% if place.user_average %}
-                <span class="average-rating">
-                    ⭐ {{ place.user_average|floatformat:1 }}
-                </span>
-            {% endif %}
+                        <div class="existing-reviews">
 
-        </div>
+                            <div class="reviews-header">
 
+                                <h4>💬 User Reviews</h4>
 
-        {% for review in place.user_reviews %}
+                                {% if place.user_average %}
+                                    <span class="average-rating">
+                                        ⭐ {{ place.user_average|floatformat:1 }}
+                                    </span>
+                                {% endif %}
 
-            <div class="review-item">
+                            </div>
 
-                <div class="review-user">
+                            {% for review in place.user_reviews %}
 
-                    <strong>
-                        {{ review.user.username }}
-                    </strong>
+                                <div class="review-item">
 
-                    <span class="review-stars">
-                        {% if review.rating >= 1 %}★{% endif %}
-                        {% if review.rating >= 2 %}★{% endif %}
-                        {% if review.rating >= 3 %}★{% endif %}
-                        {% if review.rating >= 4 %}★{% endif %}
-                        {% if review.rating >= 5 %}★{% endif %}
-                    </span>
+                                    <div class="review-user">
 
-                </div>
+                                        <strong>
+                                            {{ review.user.username }}
+                                        </strong>
 
-                <p>{{ review.review_text }}</p>
+                                        <span class="review-stars">
+                                            {% if review.rating >= 1 %}★{% endif %}
+                                            {% if review.rating >= 2 %}★{% endif %}
+                                            {% if review.rating >= 3 %}★{% endif %}
+                                            {% if review.rating >= 4 %}★{% endif %}
+                                            {% if review.rating >= 5 %}★{% endif %}
+                                        </span>
 
-                <small>
-                    {{ review.created_at|date:"d M Y" }}
-                </small>
+                                    </div>
 
-            </div>
+                                    <p>{{ review.review_text }}</p>
 
-        {% empty %}
+                                    <small>
+                                        {{ review.created_at|date:"d M Y" }}
+                                    </small>
 
-            <p class="no-reviews">
-                No reviews yet. Be the first to review this place!
-            </p>
+                                </div>
 
-        {% endfor %}
+                            {% empty %}
 
-    </div>
+                                <p class="no-reviews">
+                                    No reviews yet. Be the first to review this place!
+                                </p>
 
-</details>
+                            {% endfor %}
 
+                        </div>
+
+                    </details>
+
+                    {% else %}
+
+                        <p class="ai-generated-note">
+                            ✨ AI-generated destination suggestion.
+                            Reviews are not available for this suggestion.
+                        </p>
+
+                    {% endif %}
 
                 </div>
 
@@ -992,38 +1053,28 @@
 
                 <div class="place-card">
 
-                    <h3>
-                        No places found
-                    </h3>
+                    <h3>No places found</h3>
 
                     <p class="place-description">
-
-                        We don't have destination data
-                        for {{ trip.destination }} yet.
-
+                        No recommendations could be generated for
+                        {{ trip.destination }}.
                     </p>
 
                 </div>
 
                 {% endfor %}
 
-
             </div>
 
         </section>
-
-
 
         <!-- RESTAURANTS -->
 
         <section class="result-section">
 
-
             <div class="result-section-title">
 
-                <h2>
-                    🍽️ Food Recommendations
-                </h2>
+                <h2>🍽️ Food Recommendations</h2>
 
                 <p>
                     Restaurants selected according to
@@ -1032,163 +1083,204 @@
 
             </div>
 
-
             <div class="restaurant-grid">
-
 
                 {% for restaurant in recommended_restaurants %}
 
                 <div class="restaurant-card">
 
-
-                    <h3>
-                        {{ restaurant.name }}
-                    </h3>
-
+                    <h3>{{ restaurant.name }}</h3>
 
                     <div class="restaurant-info">
 
-                        {{ restaurant.cuisine }}
-                        •
-                        {{ restaurant.price_range }}
+                        <div>
+                            {{ restaurant.cuisine|default:"Cuisine information unavailable" }}
+                        </div>
+
+                        <div style="margin-top: 9px;">
+
+                            {% if restaurant.is_ai_generated %}
+
+                                <strong>AI-Suggested Price Range:</strong>
+
+                                {{ restaurant.price_range|default:"Unavailable" }}
+
+                                <span class="unverified">
+                                    (Not independently verified)
+                                </span>
+
+                            {% else %}
+
+                                <strong>Database Price Range:</strong>
+
+                                {{ restaurant.price_range|default:"Price unavailable" }}
+
+                            {% endif %}
+
+                        </div>
 
                     </div>
 
-
                     <div class="restaurant-bottom">
-                        <details class="review-details">
-
-    <summary>
-        <span>⭐ Reviews & Rating</span>
-
-        {% if restaurant.review_count > 0 %}
-            <span class="review-count">
-                {{ restaurant.review_count }}
-                Review{{ restaurant.review_count|pluralize }}
-            </span>
-        {% else %}
-            <span class="review-count">
-                No Reviews
-            </span>
-        {% endif %}
-    </summary>
-
-
-    <!-- WRITE RESTAURANT REVIEW -->
-
-    <div class="review-box">
-
-        <h4>Share Your Experience</h4>
-
-        <form method="POST"
-              action="{% url 'add_restaurant_review' restaurant.id %}">
-
-            {% csrf_token %}
-
-            <input
-                type="hidden"
-                name="trip_id"
-                value="{{ trip.id }}"
-            >
-
-            <div class="review-fields">
-
-                <input
-                    type="number"
-                    name="rating"
-                    min="1"
-                    max="5"
-                    placeholder="Rating (1-5)"
-                    required
-                >
-
-                <textarea
-                    name="review_text"
-                    rows="3"
-                    placeholder="Write your food experience..."
-                    required
-                ></textarea>
-
-                <button type="submit" class="review-submit">
-                    Submit Review
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-
-    <!-- EXISTING RESTAURANT REVIEWS -->
-
-    <div class="existing-reviews">
-
-        <div class="reviews-header">
-
-            <h4>💬 User Reviews</h4>
-
-            {% if restaurant.user_average %}
-                <span class="average-rating">
-                    ⭐ {{ restaurant.user_average|floatformat:1 }}
-                </span>
-            {% endif %}
-
-        </div>
-
-
-        {% for review in restaurant.user_reviews %}
-
-            <div class="review-item">
-
-                <div class="review-user">
-
-                    <strong>
-                        {{ review.user.username }}
-                    </strong>
-
-                    <span class="review-stars">
-                        {% if review.rating >= 1 %}★{% endif %}
-                        {% if review.rating >= 2 %}★{% endif %}
-                        {% if review.rating >= 3 %}★{% endif %}
-                        {% if review.rating >= 4 %}★{% endif %}
-                        {% if review.rating >= 5 %}★{% endif %}
-                    </span>
-
-                </div>
-
-                <p>
-                    {{ review.review_text }}
-                </p>
-
-                <small>
-                    {{ review.created_at|date:"d M Y" }}
-                </small>
-
-            </div>
-
-        {% empty %}
-
-            <p class="no-reviews">
-                No reviews yet. Be the first to review this restaurant!
-            </p>
-
-        {% endfor %}
-
-    </div>
-
-</details>
 
                         <span>
-                            {{ restaurant.food_type|title }}
+                            {{ restaurant.food_type|default:"Not specified"|title }}
                         </span>
 
                         <span class="restaurant-rating">
-                            ★ {{ restaurant.rating }}
+
+                            {% if restaurant.is_ai_generated %}
+
+                                Rating Unavailable
+
+                            {% elif restaurant.rating %}
+
+                                ★ {{ restaurant.rating }} (Database)
+
+                            {% else %}
+
+                                Rating Unavailable
+
+                            {% endif %}
+
                         </span>
 
                     </div>
 
+                    <!-- RESTAURANT REVIEWS -->
+
+                    {% if restaurant.id %}
+
+                    <details class="review-details">
+
+                        <summary>
+
+                            <span>⭐ Reviews & Rating</span>
+
+                            {% if restaurant.review_count > 0 %}
+
+                                <span class="review-count">
+                                    {{ restaurant.review_count }}
+                                    Review{{ restaurant.review_count|pluralize }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="review-count">
+                                    No Reviews
+                                </span>
+
+                            {% endif %}
+
+                        </summary>
+
+                        <div class="review-box">
+
+                            <h4>Share Your Experience</h4>
+
+                            <form method="POST"
+                                  action="{% url 'add_restaurant_review' restaurant.id %}">
+
+                                {% csrf_token %}
+
+                                <input
+                                    type="hidden"
+                                    name="trip_id"
+                                    value="{{ trip.id }}"
+                                >
+
+                                <div class="review-fields">
+
+                                    <input
+                                        type="number"
+                                        name="rating"
+                                        min="1"
+                                        max="5"
+                                        placeholder="Rating (1-5)"
+                                        required
+                                    >
+
+                                    <textarea
+                                        name="review_text"
+                                        rows="3"
+                                        placeholder="Write your food experience..."
+                                        required
+                                    ></textarea>
+
+                                    <button type="submit" class="review-submit">
+                                        Submit Review
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                        <div class="existing-reviews">
+
+                            <div class="reviews-header">
+
+                                <h4>💬 User Reviews</h4>
+
+                                {% if restaurant.user_average %}
+
+                                    <span class="average-rating">
+                                        ⭐ {{ restaurant.user_average|floatformat:1 }}
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                            {% for review in restaurant.user_reviews %}
+
+                                <div class="review-item">
+
+                                    <div class="review-user">
+
+                                        <strong>
+                                            {{ review.user.username }}
+                                        </strong>
+
+                                        <span class="review-stars">
+                                            {% if review.rating >= 1 %}★{% endif %}
+                                            {% if review.rating >= 2 %}★{% endif %}
+                                            {% if review.rating >= 3 %}★{% endif %}
+                                            {% if review.rating >= 4 %}★{% endif %}
+                                            {% if review.rating >= 5 %}★{% endif %}
+                                        </span>
+
+                                    </div>
+
+                                    <p>{{ review.review_text }}</p>
+
+                                    <small>
+                                        {{ review.created_at|date:"d M Y" }}
+                                    </small>
+
+                                </div>
+
+                            {% empty %}
+
+                                <p class="no-reviews">
+                                    No reviews yet. Be the first to review this restaurant!
+                                </p>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </details>
+
+                    {% else %}
+
+                        <p class="ai-generated-note">
+                            ✨ AI-generated restaurant suggestion.
+                            Reviews are not available for this suggestion.
+                        </p>
+
+                    {% endif %}
 
                 </div>
 
@@ -1196,39 +1288,114 @@
 
                 <div class="restaurant-card">
 
-                    <h3>
-                        No restaurants found
-                    </h3>
+                    <h3>No restaurants found</h3>
 
                     <div class="restaurant-info">
-
-                        Restaurant recommendations
-                        for {{ trip.destination }}
-                        are not available yet.
-
+                        No restaurant recommendations could be generated
+                        for {{ trip.destination }}.
                     </div>
 
                 </div>
 
                 {% endfor %}
 
+            </div>
+
+        </section>
+
+        <!-- INTERACTIVE MAP -->
+
+        <section class="result-section">
+
+            <div class="result-section-title">
+
+                <h2>🗺️ Explore Your Trip on Map</h2>
+
+                <p>
+                    View the locations of your recommended attractions
+                    and restaurants on an interactive map.
+                </p>
+
+            </div>
+
+            <div class="map-container">
+
+                <div id="travel-map"></div>
+
+                <div class="map-legend">
+
+                    <div class="legend-item">
+                        <span class="legend-dot place-dot"></span>
+                        <span>Tourist Attractions</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <span class="legend-dot restaurant-dot"></span>
+                        <span>Restaurants</span>
+                    </div>
+
+                </div>
+
+                <div id="map-empty" class="map-empty">
+                    No map coordinates are available for the recommended locations yet.
+                </div>
+
+                <p class="map-note">
+                    Map data © OpenStreetMap contributors.
+                    Marker positions are based on available location coordinates.
+                </p>
+
+            </div>
+
+            <!-- MAP LOCATION DATA -->
+
+            <div id="map-location-data" hidden>
+
+                {% for place in recommended_places %}
+
+                    {% if place.latitude != None and place.longitude != None %}
+
+                        <div
+                            class="map-location"
+                            data-name="{{ place.name }}"
+                            data-type="Attraction"
+                            data-lat="{{ place.latitude }}"
+                            data-lng="{{ place.longitude }}"
+                            data-description="{{ place.description|default:'Recommended tourist attraction' }}"
+                        ></div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+                {% for restaurant in recommended_restaurants %}
+
+                    {% if restaurant.latitude != None and restaurant.longitude != None %}
+
+                        <div
+                            class="map-location"
+                            data-name="{{ restaurant.name }}"
+                            data-type="Restaurant"
+                            data-lat="{{ restaurant.latitude }}"
+                            data-lng="{{ restaurant.longitude }}"
+                            data-description="{{ restaurant.cuisine|default:'Recommended restaurant' }}"
+                        ></div>
+
+                    {% endif %}
+
+                {% endfor %}
 
             </div>
 
         </section>
 
-
-
         <!-- BUDGET -->
 
         <section class="result-section">
 
-
             <div class="result-section-title">
 
-                <h2>
-                    💰 Smart Budget Plan
-                </h2>
+                <h2>💰 Smart Budget Plan</h2>
 
                 <p>
                     Your budget is intelligently divided
@@ -1237,73 +1404,38 @@
 
             </div>
 
-
             <div class="budget-grid">
 
-
                 <div class="budget-card">
-
                     <span>🏨 Hotel</span>
-
-                    <strong>
-                        ₹{{ hotel_budget|floatformat:0 }}
-                    </strong>
-
+                    <strong>₹{{ hotel_budget|floatformat:0 }}</strong>
                 </div>
 
-
                 <div class="budget-card">
-
                     <span>🍽️ Food</span>
-
-                    <strong>
-                        ₹{{ food_budget|floatformat:0 }}
-                    </strong>
-
+                    <strong>₹{{ food_budget|floatformat:0 }}</strong>
                 </div>
 
-
                 <div class="budget-card">
-
                     <span>🚕 Travel</span>
-
-                    <strong>
-                        ₹{{ travel_budget|floatformat:0 }}
-                    </strong>
-
+                    <strong>₹{{ travel_budget|floatformat:0 }}</strong>
                 </div>
 
-
                 <div class="budget-card">
-
                     <span>🎟️ Activities</span>
-
-                    <strong>
-                        ₹{{ activity_budget|floatformat:0 }}
-                    </strong>
-
+                    <strong>₹{{ activity_budget|floatformat:0 }}</strong>
                 </div>
-
 
                 <div class="budget-card">
-
                     <span>🧾 Miscellaneous</span>
-
-                    <strong>
-                        ₹{{ misc_budget|floatformat:0 }}
-                    </strong>
-
+                    <strong>₹{{ misc_budget|floatformat:0 }}</strong>
                 </div>
-
 
             </div>
 
-
             <div class="budget-total">
 
-                <span>
-                    Estimated Trip Budget
-                </span>
+                <span>Estimated Trip Budget</span>
 
                 <strong>
                     ₹{{ total_budget|floatformat:0 }}
@@ -1311,249 +1443,427 @@
 
             </div>
 
-
         </section>
-
-
 
         <!-- ITINERARY -->
 
         <section class="result-section">
 
-
             <div class="result-section-title">
 
-                <h2>
-                    📅 Day-wise Itinerary
-                </h2>
+                <h2>📅 Day-wise Itinerary</h2>
 
                 <p>
-                    A simple schedule based on your
+                    A personalized schedule based on your
                     trip duration and recommendations.
                 </p>
 
             </div>
 
-
             <div class="itinerary">
 
-    {% for day in itinerary %}
+                {% for day in itinerary %}
 
-    <div class="day-card">
+                <div class="day-card">
 
-        <div class="day-title">
+                    <div class="day-title">
 
-            <div class="day-number">
-                {{ day.day }}
+                        <div class="day-number">
+                            {{ day.day }}
+                        </div>
+
+                        <h3>Day {{ day.day }}</h3>
+
+                    </div>
+
+                    <!-- MORNING -->
+
+                    {% if day.morning %}
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-icon">🌅</div>
+
+                        <div class="schedule-content">
+
+                            <span class="schedule-time">
+                                🌅 MORNING • 9:00 AM – 11:00 AM
+                            </span>
+
+                            <h4>{{ day.morning.name }}</h4>
+
+                            <p>{{ day.morning.description }}</p>
+
+                            <div class="schedule-meta">
+
+                                <span>
+                                    📍 {{ day.morning.category }}
+                                </span>
+
+                                <span>
+                                    {% if day.morning.rating %}
+                                        ⭐ {{ day.morning.rating }} (Database)
+                                    {% elif day.morning.is_ai_generated %}
+                                        AI Suggestion • Rating Unavailable
+                                    {% else %}
+                                        Rating Unavailable
+                                    {% endif %}
+                                </span>
+
+                                {% if day.morning.average_cost != None %}
+
+                                    <span>
+                                        {% if day.morning.is_ai_generated %}
+                                            Estimated Cost: ₹{{ day.morning.average_cost|floatformat:0 }}
+                                        {% else %}
+                                            Database Cost: ₹{{ day.morning.average_cost|floatformat:0 }}
+                                        {% endif %}
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+                    <!-- AFTERNOON -->
+
+                    {% if day.afternoon %}
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-icon">☀️</div>
+
+                        <div class="schedule-content">
+
+                            <span class="schedule-time">
+                                ☀️ AFTERNOON • 11:30 AM – 1:00 PM
+                            </span>
+
+                            <h4>{{ day.afternoon.name }}</h4>
+
+                            <p>{{ day.afternoon.description }}</p>
+
+                            <div class="schedule-meta">
+
+                                <span>
+                                    📍 {{ day.afternoon.category }}
+                                </span>
+
+                                <span>
+                                    {% if day.afternoon.rating %}
+                                        ⭐ {{ day.afternoon.rating }} (Database)
+                                    {% elif day.afternoon.is_ai_generated %}
+                                        AI Suggestion • Rating Unavailable
+                                    {% else %}
+                                        Rating Unavailable
+                                    {% endif %}
+                                </span>
+
+                                {% if day.afternoon.average_cost != None %}
+
+                                    <span>
+                                        {% if day.afternoon.is_ai_generated %}
+                                            Estimated Cost: ₹{{ day.afternoon.average_cost|floatformat:0 }}
+                                        {% else %}
+                                            Database Cost: ₹{{ day.afternoon.average_cost|floatformat:0 }}
+                                        {% endif %}
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+                    <!-- RESTAURANT -->
+
+                    {% if day.restaurant %}
+
+                    <div class="schedule-item food-item">
+
+                        <div class="schedule-icon">🍽️</div>
+
+                        <div class="schedule-content">
+
+                            <span class="schedule-time">
+                                🍽️ LUNCH • 1:00 PM – 2:00 PM
+                            </span>
+
+                            <h4>{{ day.restaurant.name }}</h4>
+
+                            <p>
+                                {{ day.restaurant.cuisine|default:"Cuisine unavailable" }}
+                                •
+                                {{ day.restaurant.price_range|default:"Price unavailable" }}
+
+                                {% if day.restaurant.is_ai_generated %}
+                                    <span class="unverified">
+                                        (AI suggested, not verified)
+                                    </span>
+                                {% endif %}
+                            </p>
+
+                            <div class="schedule-meta">
+
+                                <span>
+                                    🍴 {{ day.restaurant.food_type|default:"Not specified"|title }}
+                                </span>
+
+                                <span>
+                                    {% if day.restaurant.rating %}
+                                        ⭐ {{ day.restaurant.rating }} (Database)
+                                    {% elif day.restaurant.is_ai_generated %}
+                                        AI Suggestion • Rating Unavailable
+                                    {% else %}
+                                        Rating Unavailable
+                                    {% endif %}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+                    <!-- EVENING -->
+
+                    {% if day.evening %}
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-icon">🌆</div>
+
+                        <div class="schedule-content">
+
+                            <span class="schedule-time">
+                                🌆 EVENING • 4:00 PM – 6:00 PM
+                            </span>
+
+                            <h4>{{ day.evening.name }}</h4>
+
+                            <p>{{ day.evening.description }}</p>
+
+                            <div class="schedule-meta">
+
+                                <span>
+                                    📍 {{ day.evening.category }}
+                                </span>
+
+                                <span>
+                                    {% if day.evening.rating %}
+                                        ⭐ {{ day.evening.rating }} (Database)
+                                    {% elif day.evening.is_ai_generated %}
+                                        AI Suggestion • Rating Unavailable
+                                    {% else %}
+                                        Rating Unavailable
+                                    {% endif %}
+                                </span>
+
+                                {% if day.evening.average_cost != None %}
+
+                                    <span>
+                                        {% if day.evening.is_ai_generated %}
+                                            Estimated Cost: ₹{{ day.evening.average_cost|floatformat:0 }}
+                                        {% else %}
+                                            Database Cost: ₹{{ day.evening.average_cost|floatformat:0 }}
+                                        {% endif %}
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+                    {% if not day.morning and not day.afternoon and not day.restaurant and not day.evening %}
+
+                        <p class="place-description">
+                            No activities could be generated for this day.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+                {% empty %}
+
+                <div class="day-card">
+
+                    <h3 style="color:white;">
+                        Itinerary unavailable
+                    </h3>
+
+                    <p class="place-description">
+                        We could not generate a day-wise itinerary.
+                        Please try again.
+                    </p>
+
+                </div>
+
+                {% endfor %}
+
             </div>
 
-            <h3>
-                Day {{ day.day }}
-            </h3>
-
-        </div>
-
-       <!-- MORNING -->
-
-{% if day.morning %}
-
-<div class="schedule-item">
-
-    <div class="schedule-icon">
-        🌅
-    </div>
-
-    <div class="schedule-content">
-
-     <span class="schedule-time">
-    🌅 MORNING • 9:00 AM – 11:00 AM
-</span>
-
-        <h4>
-            {{ day.morning.name }}
-        </h4>
-
-        <p>
-            {{ day.morning.description }}
-        </p>
-
-        <div class="schedule-meta">
-
-            <span>
-                📍 {{ day.morning.category }}
-            </span>
-
-            <span>
-                ⭐ {{ day.morning.rating }}
-            </span>
-
-        </div>
-
-    </div>
-
-</div>
-
-{% endif %}
-
-
-<!-- AFTERNOON -->
-
-{% if day.afternoon %}
-
-<div class="schedule-item">
-
-    <div class="schedule-icon">
-        ☀️
-    </div>
-
-    <div class="schedule-content">
-
-        <span class="schedule-time">
-    ☀️ AFTERNOON • 12:00 PM – 3:00 PM
-</span>
-
-        <h4>
-            {{ day.afternoon.name }}
-        </h4>
-
-        <p>
-            {{ day.afternoon.description }}
-        </p>
-
-        <div class="schedule-meta">
-
-            <span>
-                📍 {{ day.afternoon.category }}
-            </span>
-
-            <span>
-                ⭐ {{ day.afternoon.rating }}
-            </span>
-
-        </div>
-
-    </div>
-
-</div>
-
-{% endif %}
-
-
-<!-- RESTAURANT -->
-
-{% if day.restaurant %}
-
-<div class="schedule-item food-item">
-
-    <div class="schedule-icon">
-        🍽️
-    </div>
-
-    <div class="schedule-content">
-
-        <span class="schedule-time">
-    🍽️ LUNCH • 3:30 PM – 4:30 PM
-</span>
-
-        <h4>
-            {{ day.restaurant.name }}
-        </h4>
-
-        <p>
-            {{ day.restaurant.cuisine }}
-            •
-            {{ day.restaurant.price_range }}
-        </p>
-
-        <div class="schedule-meta">
-
-            <span>
-                🍴 {{ day.restaurant.food_type|title }}
-            </span>
-
-            <span>
-                ⭐ {{ day.restaurant.rating }}
-            </span>
-
-        </div>
-
-    </div>
-
-</div>
-
-{% endif %}
-
-
-<!-- EVENING -->
-
-{% if day.evening %}
-
-<div class="schedule-item">
-
-    <div class="schedule-icon">
-        🌆
-    </div>
-
-    <div class="schedule-content">
-
-   <span class="schedule-time">
-    🌆 EVENING • 5:00 PM – 7:00 PM
-</span>
-
-        <h4>
-            {{ day.evening.name }}
-        </h4>
-
-        <p>
-            {{ day.evening.description }}
-        </p>
-
-        <div class="schedule-meta">
-
-            <span>
-                📍 {{ day.evening.category }}
-            </span>
-
-            <span>
-                ⭐ {{ day.evening.rating }}
-            </span>
-
-        </div>
-
-    </div>
-
-</div>
-
-{% endif %}
-
-    </div>
-
-    {% endfor %}
-
-</div>
-
         </section>
-
-
 
         <!-- ACTIONS -->
 
         <div class="result-actions">
 
-            <a href="{% url 'plan_trip' %}"
-               class="primary-btn">
-
+            <a href="{% url 'plan_trip' %}" class="primary-btn">
                 Plan Another Trip
                 <span>→</span>
-
             </a>
 
         </div>
 
-
     </main>
+
+    <!-- LEAFLET JAVASCRIPT -->
+
+
+    <!-- LEAFLET JAVASCRIPT -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const mapElement = document.getElementById("travel-map");
+            const emptyMessage = document.getElementById("map-empty");
+
+            if (!mapElement || typeof L === "undefined") {
+                if (emptyMessage) {
+                    emptyMessage.style.display = "block";
+                    emptyMessage.textContent =
+                        "The map library could not be loaded. Please check your internet connection.";
+                }
+                return;
+            }
+
+            // Initialize map
+            const map = L.map("travel-map");
+
+
+
+// CARTO Dark Matter tiles with your API key
+L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=cb1_5drm_1_efd0177e22d8ec65fb3571e6",
+    {
+        subdomains: "abcd",
+        maxZoom: 20,
+        attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+            '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+    }
+).addTo(map);
+
+
+
+            const locations = document.querySelectorAll(".map-location");
+            const mapBounds = [];
+            let markerCount = 0;
+
+            locations.forEach(function (location) {
+
+                const name = location.dataset.name || "Unknown location";
+                const type = location.dataset.type || "Location";
+                const description = location.dataset.description || "";
+
+                const latitude = Number(location.dataset.lat);
+                const longitude = Number(location.dataset.lng);
+
+                // Validate coordinates
+                if (
+                    !Number.isFinite(latitude) ||
+                    !Number.isFinite(longitude) ||
+                    latitude < -90 ||
+                    latitude > 90 ||
+                    longitude < -180 ||
+                    longitude > 180
+                ) {
+                    return;
+                }
+
+                // Purple for attractions, green for restaurants
+                const markerColor =
+                    type === "Restaurant" ? "#22c55e" : "#9747ff";
+
+                const marker = L.circleMarker(
+                    [latitude, longitude],
+                    {
+                        radius: 9,
+                        color: markerColor,
+                        fillColor: markerColor,
+                        fillOpacity: 0.9,
+                        weight: 2
+                    }
+                ).addTo(map);
+
+                // Create popup safely
+                const popupContent = document.createElement("div");
+
+                const title = document.createElement("div");
+                title.className = "map-popup-title";
+                title.textContent = name;
+
+                const category = document.createElement("div");
+                category.className = "map-popup-type";
+                category.textContent = type;
+
+                const detail = document.createElement("p");
+                detail.style.margin = "7px 0 0";
+                detail.style.fontSize = "12px";
+                detail.textContent = description;
+
+                popupContent.appendChild(title);
+                popupContent.appendChild(category);
+                popupContent.appendChild(detail);
+
+                marker.bindPopup(popupContent);
+
+                mapBounds.push([latitude, longitude]);
+                markerCount++;
+            });
+
+            // Fit map to available markers
+            if (markerCount > 0) {
+
+                map.fitBounds(mapBounds, {
+                    padding: [40, 40],
+                    maxZoom: 13
+                });
+
+            } else {
+
+                // Default India view
+                map.setView([22.9734, 78.6569], 5);
+
+                emptyMessage.style.display = "block";
+            }
+
+            // Fix map rendering
+            setTimeout(function () {
+                map.invalidateSize();
+            }, 200);
+
+        });
+    </script>
 
 
 </body>
-
 </html>
